@@ -122,6 +122,10 @@ for (int i = 0; i < m.Length; i++)
 		m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + 1] == '+' || m[i - 1] == '+' || m[i + page] == '+' || m[i - page] == '+') ? '+' : m[i];
 		if (m[i] != ch)
 			continue;
+
+		m[i] = m[i] == '+' && (m[i + 1] == '+' || m[i + 1] == ' ') && (m[i - 1] == '+' || m[i - 1] == ' ') && (m[i + page] == '+' || m[i + page] == ' ') && (m[i - page] == '+' || m[i - page] == ' ') ? ' ' : m[i];
+		if (m[i] != ch)
+			continue;
 	}
 }
 
