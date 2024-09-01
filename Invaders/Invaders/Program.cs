@@ -65,12 +65,12 @@ for (int i = 0; i < m.Length; i++)
 				continue;
 
 			// Разрушаем преграды
-			m[i] = m[i] == '=' && (m[i - page] == '/' || m[i - page] == '\\' || m[i - page] == '<' || m[i - page] == '>') ? ' ' : m[i];
+			m[i] = m[i] == '=' && m[i - page - page] == '*' ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 
 			// Конец игры
-			m[i] = (m[i] == '_' || m[i] == '^' || m[i] == '#') && (m[i - page] == '/' || m[i - page] == '\\' || m[i - page] == '<' || m[i - page] == '>') ? throw new Exception("Game Over") : m[i];
+			m[i] = (m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - page - page] == '*' ? throw new Exception("Game Over") : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -101,10 +101,9 @@ for (int i = 0; i < m.Length; i++)
 var cycle = m[indexCycle] % 18;
 
 pass = 2;
-for (int i = 0; i < m.Length - 1; i++)
+for (int i = m.Length - 1; i >= 0; i--)
 {
-	var i2 = m.Length - i - 1;
-	var ch = m[i2];
+	var ch = m[i];
 
 	if (pass == 2)
 	{
@@ -115,12 +114,12 @@ for (int i = 0; i < m.Length - 1; i++)
 				cycle < 9)
 			{
 				var look = -1;
-				m[i2] = (m[i2] == ' ' || m[i2] == '/' || m[i2] == '\\' || m[i2] == '*' || m[i2] == '0' || m[i2] == '<' || m[i2] == '>') && (m[i2 + look] == '/' || m[i2 + look] == '\\' || m[i2 + look] == '*' || m[i2 + look] == '0' || m[i2 + look] == '<' || m[i2 + look] == '>') ? m[i2 + look] : m[i2];
-				if (m[i2] != ch)
+				m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>') ? m[i + look] : m[i];
+				if (m[i] != ch)
 					continue;
 
-				m[i2] = (m[i2] == '/' || m[i2] == '\\' || m[i2] == '*' || m[i2] == '0' || m[i2] == '<' || m[i2] == '>') && (m[i2 + look] == ' ' || m[i2 + look] == '-') ? ' ' : m[i2];
-				if (m[i2] != ch)
+				m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
+				if (m[i] != ch)
 					continue;
 			}
 
@@ -129,12 +128,12 @@ for (int i = 0; i < m.Length - 1; i++)
 				cycle == 0)
 			{
 				var look = -page;
-				m[i2] = (m[i2] == ' ' || m[i2] == '/' || m[i2] == '\\' || m[i2] == '*' || m[i2] == '0' || m[i2] == '<' || m[i2] == '>') && (m[i2 + look] == '/' || m[i2 + look] == '\\' || m[i2 + look] == '*' || m[i2 + look] == '0' || m[i2 + look] == '<' || m[i2 + look] == '>') ? m[i2 + look] : m[i2];
-				if (m[i2] != ch)
+				m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>') ? m[i + look] : m[i];
+				if (m[i] != ch)
 					continue;
 
-				m[i2] = (m[i2] == '/' || m[i2] == '\\' || m[i2] == '*' || m[i2] == '0' || m[i2] == '<' || m[i2] == '>') && (m[i2 + look] == ' ' || m[i2 + look] == '-') ? ' ' : m[i2];
-				if (m[i2] != ch)
+				m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
+				if (m[i] != ch)
 					continue;
 			}
 		}
