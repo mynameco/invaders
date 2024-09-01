@@ -95,7 +95,7 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i > offset)
 	{
-		if (m[indexCycle] % delayBullet == 0)
+		if ((m[indexCycle] % delayBullet) == 0)
 		{
 			// Пуля
 			m[i] = (m[i] >= '*' && m[i] <= '\\' && m[i + p] == '!' && m[i] != '+') ? '+' : ((m[i] == '!' && m[i - p] == '+') ? ' ' : m[i]);
@@ -149,15 +149,12 @@ for (int i = m.Length - 1; i >= 0; i--)
 {
 	var ch = m[i];
 
-	if (i > offset)
+	if (i > offset && (m[indexCycle] % delayBullet) == 0)
 	{
-		if ((m[indexCycle] % delayBullet) == 0)
-		{
-			// Пуля
-			m[i] = (m[i] == ' ' && m[i - p] == 'o') ? 'o' : ((m[i] == 'o' && m[i + p] == 'o') ? ' ' : (m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')) ? ' ' : (m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : ((m[i] == '~' && m[i - p] == 'o') ? 'l' : ((m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o') ? ' ' : m[i])))));
-			if (m[i] != ch)
-				continue;
-		}
+		// Пуля
+		m[i] = (m[i] == ' ' && m[i - p] == 'o') ? 'o' : ((m[i] == 'o' && m[i + p] == 'o') ? ' ' : (m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')) ? ' ' : (m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : ((m[i] == '~' && m[i - p] == 'o') ? 'l' : ((m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o') ? ' ' : m[i])))));
+		if (m[i] != ch)
+			continue;
 	}
 }
 
