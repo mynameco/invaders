@@ -47,14 +47,14 @@ for (int i = 0; i < m.Length; i++)
 			continue;
 
 		// Победа
-		m[i] = i == indexPlayerTmp && m.AsSpan(offset).ToString().IndexOf('0') == -1 ? throw new Exception("Win") : m[i];
+		m[i] = i == indexPlayerTmp && m.AsSpan(offset).ToString().IndexOf('0') == -1 ? throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n") : m[i];
 		if (m[i] != ch)
 			continue;
 	}
 	else
 	{
 		// Конец игры
-		m[i] = (m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*' ? throw new Exception("Game Over") : m[i];
+		m[i] = (m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*' ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : m[i];
 		if (m[i] != ch)
 			continue;
 
@@ -272,7 +272,7 @@ for (int i = m.Length - 1; i >= 0; i--)
 				continue;
 
 			// Попадание в игрока
-			m[i] = m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("Game Over") : m[i];
+			m[i] = m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : m[i];
 			if (m[i] != ch)
 				continue;
 
@@ -327,5 +327,9 @@ for (int i = 0; i < m.Length; i++)
 	}
 }
 
+var fr = m.AsSpan(offset).ToString().IndexOf('+') != -1 ? 800 : (m.AsSpan(offset).ToString().IndexOf('!') != -1 ? 4500 : 100);
+Console.Beep(fr, 10);
+
 Thread.Sleep(20);
+
 goto loop;
