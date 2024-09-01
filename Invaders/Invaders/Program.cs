@@ -276,19 +276,6 @@ for (int i = m.Length - 1; i >= 0; i--)
 
 	if (i > offset)
 	{
-		// Сдвиг персонажа вправо
-		if (m[indexInput] == 'd' &&
-			m[indexPlayer] < p - 7)
-		{
-			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookRight] == '#' || m[i + lookRight] == '^') && m[i] != m[i + lookRight] ? m[i + lookRight] : m[i];
-			if (m[i] != ch)
-				continue;
-
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"') ? ' ' : m[i];
-			if (m[i] != ch)
-				continue;
-		}
-
 		if (m[indexCycle] % delayMove == 5)
 		{
 			// Сдвиг врагов вправо
@@ -316,6 +303,19 @@ for (int i = m.Length - 1; i >= 0; i--)
 				if (m[i] != ch)
 					continue;
 			}
+		}
+
+		// Сдвиг персонажа вправо
+		if (m[indexInput] == 'd' &&
+			m[indexPlayer] < p - 7)
+		{
+			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookRight] == '#' || m[i + lookRight] == '^') && m[i] != m[i + lookRight] ? m[i + lookRight] : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
 		}
 	}
 }
@@ -364,19 +364,6 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i > offset)
 	{
-		// Сдвиг персонажа влево
-		if (m[indexInput] == 'a' &&
-			m[indexPlayer] > 5)
-		{
-			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') && m[i] != m[i + lookLeft] ? m[i + lookLeft] : m[i];
-			if (m[i] != ch)
-				continue;
-
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') ? ' ' : m[i];
-			if (m[i] != ch)
-				continue;
-		}
-
 		if (m[indexCycle] % delayMove == 5)
 		{
 			// Сдвиг врагов влево
@@ -390,6 +377,19 @@ for (int i = 0; i < m.Length; i++)
 				if (m[i] != ch)
 					continue;
 			}
+		}
+
+		// Сдвиг персонажа влево
+		if (m[indexInput] == 'a' &&
+			m[indexPlayer] > 5)
+		{
+			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') && m[i] != m[i + lookLeft] ? m[i + lookLeft] : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
 		}
 	}
 }
