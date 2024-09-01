@@ -105,7 +105,7 @@ for (int i = 0; i < m.Length; i++)
 			continue;
 
 		// Выстрел
-		m[i] = (m[i] == ' ' && m[i + p] == '^' && m[indexInput] == ' ') ? '!' : m[i];
+		m[i] = (m[i] == ' ' && m[i + p] == '^' && m[indexInput] == ' ' && m.AsSpan(offset).ToString().IndexOf('!') == -1) ? '!' : m[i];
 		if (m[i] != ch)
 			continue;
 
