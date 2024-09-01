@@ -199,8 +199,6 @@ for (int i = 0; i < m.Length; i++)
 	}
 }
 
-var cycle = m[indexCycleMove] % 18;
-
 for (int i = m.Length - 1; i >= 0; i--)
 {
 	var ch = m[i];
@@ -225,8 +223,8 @@ for (int i = m.Length - 1; i >= 0; i--)
 		if (m[indexCycle] % delayMove == 0)
 		{
 			// Сдвиг врагов вправо
-			if (cycle > 0 &&
-				cycle < 9)
+			if ((m[indexCycleMove] % 18) > 0 &&
+				(m[indexCycleMove] % 18) < 9)
 			{
 				var look = -1;
 
@@ -240,8 +238,8 @@ for (int i = m.Length - 1; i >= 0; i--)
 			}
 
 			// Сдвиг врагов вниз
-			if (cycle == 9 ||
-				cycle == 0)
+			if ((m[indexCycleMove] % 18) == 9 ||
+				(m[indexCycleMove] % 18) == 0)
 			{
 				var look = -p;
 
@@ -311,7 +309,7 @@ for (int i = 0; i < m.Length; i++)
 		if (m[indexCycle] % delayMove == 0)
 		{
 			// Сдвиг врагов влево
-			if (cycle > 9)
+			if ((m[indexCycleMove] % 18) > 9)
 			{
 				var look = 1;
 
