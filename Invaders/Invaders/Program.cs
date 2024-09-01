@@ -1,7 +1,7 @@
 ﻿var m = "\0|\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"|\n|    **          **          **          **          **          **            |\n|  *0**0*      *0**0*      *0**0*      *0**0*      *0**0*      *0**0*          |\n|  ******      ******      ******      ******      ******      ******          |\n|   /  \\        <  >        /  \\        <  >        /  \\        <  >           |\n|                                                                              |\n|   ****        ****        ****        ****        ****        ****           |\n| **0**0**    **0**0**    **0**0**    **0**0**    **0**0**    **0**0**         |\n| ********    ********    ********    ********    ********    ********         |\n|  <    >      /    \\      <    >      /    \\      <    >      /    \\          |\n|                                                                              |\n|   *  *        *  *        *  *        *  *        *  *        *  *           |\n| \\*0**0*/     *0**0*     \\*0**0*/     *0**0*     \\*0**0*/     *0**0*          |\n|  ******     /******\\     ******     /******\\     ******     /******\\         |\n|   /  \\        <  >        /  \\        <  >        /  \\        <  >           |\n|                                                                              |\n|                                                                              |\n|                                                                              |\n|                                                                              |\n|                                                                              |\n|    ~~~~~~~~~~          ~~~~~~~~~~          ~~~~~~~~~~          ~~~~~~~~~~    |\n|                                                                              |\n|                                       ^                                      |\n|                                     #####                                    |\n|                                    #######                                   |\n|______________________________________________________________________________|".ToCharArray();
 var offset = 1;
 var indexCycle = 0;
-var page = 81;
+var p = 81;
 
 loop:
 Console.SetCursorPosition(0, 0);
@@ -20,7 +20,7 @@ for (int i = 0; i < m.Length; i++)
 	else
 	{
 		// Конец игры
-		m[i] = (m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - page - page] == '*' ? throw new Exception("Game Over") : m[i];
+		m[i] = (m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*' ? throw new Exception("Game Over") : m[i];
 		if (m[i] != ch)
 			continue;
 
@@ -33,46 +33,46 @@ for (int i = 0; i < m.Length; i++)
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == '/' && m[i - page] == '*' ? '<' : m[i];
+		m[i] = m[i] == '/' && m[i - p] == '*' ? '<' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == '\\' && m[i - page] == '*' ? '>' : m[i];
+		m[i] = m[i] == '\\' && m[i - p] == '*' ? '>' : m[i];
 		if (m[i] != ch)
 			continue;
 
 		// Анимация рук
-		m[i] = m[i] == ' ' && m[i + 2] == '0' && m[i + page] == '/' ? '\\' : m[i];
+		m[i] = m[i] == ' ' && m[i + 2] == '0' && m[i + p] == '/' ? '\\' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == '/' && m[i - page] == '\\' ? ' ' : m[i];
+		m[i] = m[i] == '/' && m[i - p] == '\\' ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == ' ' && m[i - 2] == '0' && m[i + page] == '\\' ? '/' : m[i];
+		m[i] = m[i] == ' ' && m[i - 2] == '0' && m[i + p] == '\\' ? '/' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == '\\' && m[i - page] == '/' ? ' ' : m[i];
+		m[i] = m[i] == '\\' && m[i - p] == '/' ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == ' ' && m[i - page] == '\\' && m[i - page + 2] == '0' ? '/' : m[i];
+		m[i] = m[i] == ' ' && m[i - p] == '\\' && m[i - p + 2] == '0' ? '/' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == ' ' && m[i - page] == '/' && m[i - page - 2] == '0' ? '\\' : m[i];
+		m[i] = m[i] == ' ' && m[i - p] == '/' && m[i - p - 2] == '0' ? '\\' : m[i];
 		if (m[i] != ch)
 			continue;
 
 		// Разрушаем преграды
-		m[i] = m[i] == '~' && (m[i - page - page] == '*' || m[i - page - page - 1] == '*' || m[i - page - page + 1] == '*') ? ' ' : m[i];
+		m[i] = m[i] == '~' && (m[i - p - p] == '*' || m[i - p - p - 1] == '*' || m[i - p - p + 1] == '*') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 
 		// Выстрел
-		m[i] = (m[i] == ' ' && m[i + page] == '^' && Console.KeyAvailable && Console.ReadKey(false).KeyChar == ' ') ? '!' : m[i];
+		m[i] = (m[i] == ' ' && m[i + p] == '^' && Console.KeyAvailable && Console.ReadKey(false).KeyChar == ' ') ? '!' : m[i];
 		if (m[i] != ch)
 			continue;
 	}
@@ -85,20 +85,20 @@ for (int i = 0; i < m.Length; i++)
 	if (i > offset)
 	{
 		// Анимация рук
-		m[i] = m[i] == '\\' && m[i + page] == '/' ? ' ' : m[i];
+		m[i] = m[i] == '\\' && m[i + p] == '/' ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == '/' && m[i + page] == '\\' ? ' ' : m[i];
+		m[i] = m[i] == '/' && m[i + p] == '\\' ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 
 		// Пуля
-		m[i] = (m[i] == ' ' && m[i + page] == '!') ? '!' : m[i];
+		m[i] = (m[i] == ' ' && m[i + p] == '!') ? '!' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = (m[i] == '!' && m[i - page] == '!') ? ' ' : m[i];
+		m[i] = (m[i] == '!' && m[i - p] == '!') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 	}
@@ -111,19 +111,20 @@ for (int i = 0; i < m.Length; i++)
 	if (i > offset)
 	{
 		// Пуля
-		m[i] = ((m[i] >= '*' && m[i] <= '\\') && m[i + page] == '!') ? '+' : m[i];
+		m[i] = ((m[i] >= '*' && m[i] <= '\\') && m[i + p] == '!') ? '+' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = (m[i] == '!' && m[i - page] == '+') ? ' ' : m[i];
+		m[i] = (m[i] == '!' && m[i - p] == '+') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + 1] == '+' || m[i - 1] == '+' || m[i + page] == '+' || m[i - page] == '+') ? '+' : m[i];
+		// Взрыв
+		m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + 1] == '+' || m[i - 1] == '+' || m[i + p] == '+' || m[i - p] == '+') ? '+' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = m[i] == '+' && (m[i + 1] == '+' || m[i + 1] == ' ') && (m[i - 1] == '+' || m[i - 1] == ' ') && (m[i + page] == '+' || m[i + page] == ' ') && (m[i - page] == '+' || m[i - page] == ' ') ? ' ' : m[i];
+		m[i] = m[i] == '+' && (m[i + 1] == '+' || m[i + 1] == ' ') && (m[i - 1] == '+' || m[i - 1] == ' ') && (m[i + p] == '+' || m[i + p] == ' ') && (m[i - p] == '+' || m[i - p] == ' ') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 	}
@@ -155,7 +156,7 @@ for (int i = m.Length - 1; i >= 0; i--)
 		if (cycle == 9 ||
 			cycle == 0)
 		{
-			var look = -page;
+			var look = -p;
 			m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + look] >= '*' && m[i + look] <= '\\') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
