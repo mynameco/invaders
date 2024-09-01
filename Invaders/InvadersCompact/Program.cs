@@ -39,7 +39,8 @@ for (int i = 0; i < m.Length; i++)
 				continue;
 		}
 
-		if (m[0] % 64 == 3 && Random.Shared.Next(0, 100) > 50)
+		if (m[0] % 64 == 3 &&
+			Random.Shared.Next(0, 100) > 50)
 		{
 			m[i] = (m[i] == ' ' && m[i - 81] == '<' && m[i + 81] != '*' && m[i + 81 + 1] != '*' && m[i + 81 - 1] != '*') ? 'o' : m[i];
 			if (m[i] != ch)
@@ -83,20 +84,24 @@ for (int i = m.Length - 1; i >= 0; i--)
 
 	if (i > 5)
 	{
-		if (m[2] == 'd' && m[3] < 81 - 7)
+		if (m[2] == 'd' &&
+			m[3] < 81 - 7)
 		{
-			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i - 1] == '#' || m[i - 1] == '^') ? m[i - 1] : m[i];
+			var look = -1;
+
+			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i + look] == '#' || m[i + look] == '^') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
 
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i - 1] == ' ' || m[i - 1] == '\"') ? ' ' : m[i];
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
 
 		if (m[0] % 16 == 0)
 		{
-			if (cycle > 0 && cycle < 9)
+			if (cycle > 0 &&
+				cycle < 9)
 			{
 				var look = -1;
 
@@ -109,7 +114,8 @@ for (int i = m.Length - 1; i >= 0; i--)
 					continue;
 			}
 
-			if (cycle == 9 || cycle == 0)
+			if (cycle == 9 ||
+				cycle == 0)
 			{
 				var look = -81;
 
