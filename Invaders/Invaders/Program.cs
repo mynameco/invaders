@@ -38,8 +38,53 @@ for (int i = 0; i < m.Length; i++)
 				continue;
 
 			// Анимация рук
-			m[i] = m[i] == ' ' && m[i + 2] == '0' && m[i + page] == '/' ? '\\' : (m[i] == '/' && m[i - page] == '\\' ? ' ' : m[i]);
-			m[i] = m[i] == ' ' && m[i - 2] == '0' && m[i + page] == '\\' ? '/' : (m[i] == '\\' && m[i - page] == '/' ? ' ' : m[i]);
+			m[i] = m[i] == ' ' && m[i + 2] == '0' && m[i + page] == '/' ? '\\' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = m[i] == '/' && m[i - page] == '\\' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = m[i] == ' ' && m[i - 2] == '0' && m[i + page] == '\\' ? '/' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = m[i] == '\\' && m[i - page] == '/' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = m[i] == ' ' && m[i - page] == '\\' && m[i - page + 2] == '0' ? '/' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = m[i] == ' ' && m[i - page] == '/' && m[i - page - 2] == '0' ? '\\' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
+	}
+}
+
+pass = 1;
+for (int i = 0; i < m.Length; i++)
+{
+	if (pass == 1)
+	{
+		if (i <= offset)
+		{
+		}
+		else
+		{
+			var ch = m[i];
+
+			// Анимация рук
+			m[i] = m[i] == '\\' && m[i + page] == '/' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = m[i] == '/' && m[i + page] == '\\' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
 		}
 	}
 }
