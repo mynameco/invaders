@@ -247,7 +247,7 @@ for (int i = 0; i < m.Length; i++)
 	{
 		if (m[indexCycle] % delayBullet == 1)
 		{
-			// Пуля
+			// Попадание пули
 			if (m[i] >= '*' && m[i] <= '\\' && m[i + p] == '!')
 			{
 				m[i] = '+';
