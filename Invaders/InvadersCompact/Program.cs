@@ -149,13 +149,9 @@ for (int i = m.Length - 1; i >= 0; i--)
 {
 	var ch = m[i];
 
-	if (i > offset && (m[indexCycle] % delayBullet) == 0)
-	{
-		// Пуля
-		m[i] = (m[i] == ' ' && m[i - p] == 'o') ? 'o' : ((m[i] == 'o' && m[i + p] == 'o') ? ' ' : (m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')) ? ' ' : (m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : ((m[i] == '~' && m[i - p] == 'o') ? 'l' : ((m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o') ? ' ' : m[i])))));
-		if (m[i] != ch)
-			continue;
-	}
+	m[i] = (i > offset && (m[indexCycle] % delayBullet) == 0) ? ((m[i] == ' ' && m[i - p] == 'o') ? 'o' : ((m[i] == 'o' && m[i + p] == 'o') ? ' ' : (m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')) ? ' ' : (m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : ((m[i] == '~' && m[i - p] == 'o') ? 'l' : ((m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o') ? ' ' : m[i])))))) : m[i];
+	if (m[i] != ch)
+		continue;
 }
 
 for (int i = 0; i < m.Length; i++)
@@ -164,19 +160,13 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i > offset)
 	{
-		if (m[indexInput] == 'a' && m[indexPlayer] > 5)
-		{
-			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') && m[i] != m[i + lookLeft] ? m[i + lookLeft] : ((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') && m[i] != ' ' ? ' ' : m[i]);
-			if (m[i] != ch)
-				continue;
-		}
+		m[i] = (m[indexInput] == 'a' && m[indexPlayer] > 5) ? ((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') && m[i] != m[i + lookLeft] ? m[i + lookLeft] : ((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') && m[i] != ' ' ? ' ' : m[i])) : m[i];
+		if (m[i] != ch)
+			continue;
 
-		if ((m[indexCycle] % delayMove) == 0 && (m[indexCycleMove] % 18) > 9)
-		{
-			m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\' && m[i] != m[i + lookLeft] ? m[i + lookLeft] : (m[i] >= '*' && m[i] <= '\\' && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"') ? ' ' : m[i]);
-			if (m[i] != ch)
-				continue;
-		}
+		m[i] = ((m[indexCycle] % delayMove) == 0 && (m[indexCycleMove] % 18) > 9) ? ((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\' && m[i] != m[i + lookLeft] ? m[i + lookLeft] : (m[i] >= '*' && m[i] <= '\\' && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"') ? ' ' : m[i])) : m[i];
+		if (m[i] != ch)
+			continue;
 	}
 }
 
