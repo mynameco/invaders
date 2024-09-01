@@ -176,8 +176,6 @@ for (int i = 0; i < m.Length; i++)
 
 for (int i = 0; i < m.Length; i++)
 {
-	var ch = m[i];
-
 	if (i <= offset)
 	{
 		// Сбрасываем буфер клавиш
@@ -190,34 +188,43 @@ for (int i = 0; i < m.Length; i++)
 		if (m[indexCycle] % delayAnimation == 0)
 		{
 			// Анимация рук
-			m[i] = m[i] == '\\' && m[i + p] == '/' ? ' ' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '\\' && m[i + p] == '/')
+			{
+				m[i] = ' ';
 				continue;
+			}
 
-			m[i] = m[i] == '/' && m[i + p] == '\\' ? ' ' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '/' && m[i + p] == '\\')
+			{
+				m[i] = ' ';
 				continue;
+			}
 		}
 
 		if (m[indexCycle] % delayBullet == 0)
 		{
 			// Пуля
-			m[i] = (m[i] == ' ' && m[i + p] == '!') ? '!' : m[i];
-			if (m[i] != ch)
+			if (m[i] == ' ' && m[i + p] == '!')
+			{
+				m[i] = '!';
 				continue;
+			}
 
-			m[i] = (m[i] == '!' && m[i - p] == '!') ? ' ' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '!' && m[i - p] == '!')
+			{
+				m[i] = ' ';
 				continue;
+			}
 		}
 
 		// Сдвиг чтобы не конфликтовало с движением
-		if (m[indexCycle] % delayEnemyShoot == 3 &&
-			Random.Shared.Next(0, 100) > 50)
+		if (m[indexCycle] % delayEnemyShoot == 3 && Random.Shared.Next(0, 100) > 50)
 		{
-			m[i] = (m[i] == ' ' && m[i - p] == '<' && m[i + p] != '*' && m[i + p + 1] != '*' && m[i + p - 1] != '*') ? 'o' : m[i];
-			if (m[i] != ch)
+			if ((m[i] == ' ' && m[i - p] == '<' && m[i + p] != '*' && m[i + p + 1] != '*' && m[i + p - 1] != '*'))
+			{
+				m[i] = 'o';
 				continue;
+			}
 		}
 	}
 }
