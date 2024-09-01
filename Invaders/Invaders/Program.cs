@@ -32,7 +32,7 @@ for (int i = 0; i < m.Length; i++)
 		}
 
 		// Число по кругу
-		if (i == indexCycleMove && m[indexCycle] % delayMove == 0)
+		if (i == indexCycleMove && m[indexCycle] % delayMove == 5)
 		{
 			m[i] = (char)(m[i] + 1);
 			continue;
@@ -74,7 +74,7 @@ for (int i = 0; i < m.Length; i++)
 			continue;
 		}
 
-		if (m[indexCycle] % delayAnimation == 0)
+		if (m[indexCycle] % delayAnimation == 3)
 		{
 			// Анимация ног
 			if (m[i] == '<')
@@ -185,7 +185,7 @@ for (int i = 0; i < m.Length; i++)
 	}
 	else
 	{
-		if (m[indexCycle] % delayAnimation == 0)
+		if (m[indexCycle] % delayAnimation == 3)
 		{
 			// Анимация рук
 			if (m[i] == '\\' && m[i + p] == '/')
@@ -201,7 +201,7 @@ for (int i = 0; i < m.Length; i++)
 			}
 		}
 
-		if (m[indexCycle] % delayBullet == 0)
+		if (m[indexCycle] % delayBullet == 1)
 		{
 			// Пуля
 			if (m[i] == ' ' && m[i + p] == '!')
@@ -217,8 +217,7 @@ for (int i = 0; i < m.Length; i++)
 			}
 		}
 
-		// Сдвиг чтобы не конфликтовало с движением
-		if (m[indexCycle] % delayEnemyShoot == 3 && Random.Shared.Next(0, 100) > 50)
+		if (m[indexCycle] % delayEnemyShoot == 7 && Random.Shared.Next(0, 100) > 50)
 		{
 			if (m[i] == ' ' && m[i - p] == '<' && m[i + p] != '*' && m[i + p + 1] != '*' && m[i + p - 1] != '*')
 			{
@@ -235,7 +234,7 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i > offset)
 	{
-		if (m[indexCycle] % delayBullet == 0)
+		if (m[indexCycle] % delayBullet == 1)
 		{
 			// Пуля
 			m[i] = (m[i] >= '*' && m[i] <= '\\' && m[i + p] == '!' && m[i] != '+') ? '+' : m[i];
@@ -277,7 +276,7 @@ for (int i = m.Length - 1; i >= 0; i--)
 				continue;
 		}
 
-		if (m[indexCycle] % delayMove == 0)
+		if (m[indexCycle] % delayMove == 5)
 		{
 			// Сдвиг врагов вправо
 			if ((m[indexCycleMove] % 18) > 0 &&
@@ -314,7 +313,7 @@ for (int i = m.Length - 1; i >= 0; i--)
 
 	if (i > offset)
 	{
-		if (m[indexCycle] % delayBullet == 0)
+		if (m[indexCycle] % delayBullet == 1)
 		{
 			// Пуля
 			m[i] = (m[i] == ' ' && m[i - p] == 'o') ? 'o' : m[i];
@@ -365,7 +364,7 @@ for (int i = 0; i < m.Length; i++)
 				continue;
 		}
 
-		if (m[indexCycle] % delayMove == 0)
+		if (m[indexCycle] % delayMove == 5)
 		{
 			// Сдвиг врагов влево
 			if ((m[indexCycleMove] % 18) > 9)
