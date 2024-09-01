@@ -31,6 +31,7 @@ for (int i = 0; i < m.Length; i++)
 		if (m[i] != ch)
 			continue;
 
+		// Инпут
 		m[i] = i == indexInput && !Console.KeyAvailable ? '\0' : m[i];
 		if (m[i] != ch)
 			continue;
@@ -39,10 +40,12 @@ for (int i = 0; i < m.Length; i++)
 		if (m[i] != ch)
 			continue;
 
+		// Позиция персонажа
 		m[i] = i == indexPlayer ? (char)(m.AsSpan(offset).ToString().IndexOf('^') % p) : m[i];
 		if (m[i] != ch)
 			continue;
 
+		// Победа
 		m[i] = i == indexPlayerTmp && m.AsSpan(offset).ToString().IndexOf('0') == -1 ? throw new Exception("Win") : m[i];
 		if (m[i] != ch)
 			continue;
