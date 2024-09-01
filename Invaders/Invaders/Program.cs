@@ -70,10 +70,7 @@ for (int i = 0; i < m.Length; i++)
 {
 	if (pass == 1)
 	{
-		if (i <= offset)
-		{
-		}
-		else
+		if (i > offset)
 		{
 			var ch = m[i];
 
@@ -84,6 +81,28 @@ for (int i = 0; i < m.Length; i++)
 
 			m[i] = m[i] == '/' && m[i + page] == '\\' ? ' ' : m[i];
 			if (m[i] != ch)
+				continue;
+		}
+	}
+}
+
+pass = 2;
+for (int i = 0; i < m.Length; i++)
+{
+	if (pass == 2)
+	{
+		if (i > offset)
+		{
+			var i2 = m.Length - i - 1;
+			var ch = m[i2];
+
+			// Сдвиг в право
+			m[i2] = (m[i2] == ' ' || m[i2] == '/' || m[i2] == '\\' || m[i2] == '*' || m[i2] == '0' || m[i2] == '<' || m[i2] == '>') && (m[i2 - 1] == '/' || m[i2 - 1] == '\\' || m[i2 - 1] == '*' || m[i2 - 1] == '0' || m[i2 - 1] == '<' || m[i2 - 1] == '>') ? m[i2 - 1] : m[i2];
+			if (m[i2] != ch)
+				continue;
+
+			m[i2] = (m[i2] == '/' || m[i2] == '\\' || m[i2] == '*' || m[i2] == '0' || m[i2] == '<' || m[i2] == '>') && m[i2 - 1] == ' ' ? ' ' : m[i2];
+			if (m[i2] != ch)
 				continue;
 		}
 	}
