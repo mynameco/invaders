@@ -147,11 +147,26 @@ for (int i = m.Length - 1; i >= 0; i--)
 
 	if (i > offset)
 	{
-		// Сдвиг вправо
+		// Сдвиг персонажа вправо
+		if (m[indexInput] == 'd')
+		{
+			var look = -1;
+
+			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i + look] == '#' || m[i + look] == '^') ? m[i + look] : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
+
+		// Сдвиг врагов вправо
 		if (cycle > 0 &&
 			cycle < 9)
 		{
 			var look = -1;
+
 			m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + look] >= '*' && m[i + look] <= '\\') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
@@ -161,11 +176,12 @@ for (int i = m.Length - 1; i >= 0; i--)
 				continue;
 		}
 
-		// Сдвиг вниз
+		// Сдвиг врагов вниз
 		if (cycle == 9 ||
 			cycle == 0)
 		{
 			var look = -p;
+
 			m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + look] >= '*' && m[i + look] <= '\\') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
@@ -183,10 +199,25 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i > offset)
 	{
-		// Сдвиг влево
+		// Сдвиг персонажа вправо
+		if (m[indexInput] == 'a')
+		{
+			var look = 1;
+
+			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i + look] == '#' || m[i + look] == '^') ? m[i + look] : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + look] == ' ') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
+
+		// Сдвиг врагов влево
 		if (cycle > 9)
 		{
 			var look = 1;
+
 			m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + look] >= '*' && m[i + look] <= '\\') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
