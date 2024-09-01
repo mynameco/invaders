@@ -265,6 +265,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 			if (m[i] != ch)
 				continue;
 
+			// Попадание в своего
+			m[i] = m[i] == 'o' && (m[i + p] >= '*' && m[i + p] <= '\\') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+
 			// Попадание в игрока
 			m[i] = m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("Game Over") : m[i];
 			if (m[i] != ch)
