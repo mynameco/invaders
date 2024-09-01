@@ -397,6 +397,6 @@ for (int i = 0; i < m.Length; i++)
 var fr = m.AsSpan(offset).ToString().IndexOf('+') != -1 ? 800 : (m.AsSpan(offset).ToString().IndexOf('!') != -1 ? 4500 : 100);
 Console.Beep(fr, 10);
 
-Thread.Sleep(20);
+Thread.Sleep(10);
 
 goto loop;
