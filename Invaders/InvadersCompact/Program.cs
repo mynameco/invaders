@@ -166,7 +166,7 @@ for (int i = 0; i < m.Length; i++)
 	{
 		if (m[indexInput] == 'a' && m[indexPlayer] > 5)
 		{
-			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') && m[i] != m[i + lookLeft] ? m[i + lookLeft] : ((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') ? ' ' : m[i]);
+			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') && m[i] != m[i + lookLeft] ? m[i + lookLeft] : ((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') && m[i] != ' ' ? ' ' : m[i]);
 			if (m[i] != ch)
 				continue;
 		}
@@ -180,8 +180,7 @@ for (int i = 0; i < m.Length; i++)
 	}
 }
 
-var fr = m.AsSpan(offset).ToString().IndexOf('+') != -1 ? 800 : (m.AsSpan(offset).ToString().IndexOf('!') != -1 ? 4500 : 100);
-Console.Beep(fr, 10);
+//Console.Beep(m.AsSpan(offset).ToString().IndexOf('+') != -1 ? 800 : (m.AsSpan(offset).ToString().IndexOf('!') != -1 ? 4500 : 100), 10);
 
 Thread.Sleep(20);
 
