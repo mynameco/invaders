@@ -85,13 +85,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 		if (m[2] == 'd' &&
 			m[3] < 81 - 7)
 		{
-			var look = -1;
-
-			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + look] == '#' || m[i + look] == '^') ? m[i + look] : m[i];
+			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i - 1] == '#' || m[i - 1] == '^') ? m[i - 1] : m[i];
 			if (m[i] != ch)
 				continue;
 
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i - 1] == ' ' || m[i - 1] == '\"') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -101,13 +99,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 			if ((m[1] % 18) > 0 &&
 				(m[1] % 18) < 9)
 			{
-				var look = -1;
-
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + look] >= '*' && m[i + look] <= '\\' ? m[i + look] : m[i];
+				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i - 1] >= '*' && m[i - 1] <= '\\' ? m[i - 1] : m[i];
 				if (m[i] != ch)
 					continue;
 
-				m[i] = m[i] >= '*' && m[i] <= '\\' && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+				m[i] = m[i] >= '*' && m[i] <= '\\' && (m[i - 1] == ' ' || m[i - 1] == '\"') ? ' ' : m[i];
 				if (m[i] != ch)
 					continue;
 			}
@@ -115,13 +111,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 			if ((m[1] % 18) == 9 ||
 				(m[1] % 18) == 0)
 			{
-				var look = -81;
-
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + look] >= '*' && m[i + look] <= '\\' ? m[i + look] : m[i];
+				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i - 81] >= '*' && m[i - 81] <= '\\' ? m[i - 81] : m[i];
 				if (m[i] != ch)
 					continue;
 
-				m[i] = m[i] >= '*' && m[i] <= '\\' && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+				m[i] = m[i] >= '*' && m[i] <= '\\' && (m[i - 81] == ' ' || m[i - 81] == '\"') ? ' ' : m[i];
 				if (m[i] != ch)
 					continue;
 			}
