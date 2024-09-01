@@ -220,7 +220,7 @@ for (int i = 0; i < m.Length; i++)
 		// Сдвиг чтобы не конфликтовало с движением
 		if (m[indexCycle] % delayEnemyShoot == 3 && Random.Shared.Next(0, 100) > 50)
 		{
-			if ((m[i] == ' ' && m[i - p] == '<' && m[i + p] != '*' && m[i + p + 1] != '*' && m[i + p - 1] != '*'))
+			if (m[i] == ' ' && m[i - p] == '<' && m[i + p] != '*' && m[i + p + 1] != '*' && m[i + p - 1] != '*')
 			{
 				m[i] = 'o';
 				continue;
