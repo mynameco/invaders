@@ -12,6 +12,10 @@ var delayAnimation = 16;
 var delayMove = 16;
 var delayEnemyShoot = 64;
 
+var lookLeft = 1;
+var lookRight = -1;
+var lookDown = -p;
+
 loop:
 Console.SetCursorPosition(0, 0);
 Console.WriteLine(m.AsSpan(offset).ToString());
@@ -209,13 +213,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 		if (m[indexInput] == 'd' &&
 			m[indexPlayer] < p - 7)
 		{
-			var look = -1;
-
-			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i + look] == '#' || m[i + look] == '^') ? m[i + look] : m[i];
+			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i + lookRight] == '#' || m[i + lookRight] == '^') ? m[i + lookRight] : m[i];
 			if (m[i] != ch)
 				continue;
 
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -226,13 +228,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 			if ((m[indexCycleMove] % 18) > 0 &&
 				(m[indexCycleMove] % 18) < 9)
 			{
-				var look = -1;
-
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + look] >= '*' && m[i + look] <= '\\') ? m[i + look] : m[i];
+				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + lookRight] >= '*' && m[i + lookRight] <= '\\') ? m[i + lookRight] : m[i];
 				if (m[i] != ch)
 					continue;
 
-				m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+				m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"') ? ' ' : m[i];
 				if (m[i] != ch)
 					continue;
 			}
@@ -241,13 +241,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 			if ((m[indexCycleMove] % 18) == 9 ||
 				(m[indexCycleMove] % 18) == 0)
 			{
-				var look = -p;
-
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + look] >= '*' && m[i + look] <= '\\') ? m[i + look] : m[i];
+				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + lookDown] >= '*' && m[i + lookDown] <= '\\') ? m[i + lookDown] : m[i];
 				if (m[i] != ch)
 					continue;
 
-				m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+				m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + lookDown] == ' ' || m[i + lookDown] == '\"') ? ' ' : m[i];
 				if (m[i] != ch)
 					continue;
 			}
@@ -295,13 +293,11 @@ for (int i = 0; i < m.Length; i++)
 		if (m[indexInput] == 'a' &&
 			m[indexPlayer] > 5)
 		{
-			var look = 1;
-
-			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i + look] == '#' || m[i + look] == '^') ? m[i + look] : m[i];
+			m[i] = (m[i] == ' ' || (m[i] == '#' || m[i] == '^')) && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') ? m[i + lookLeft] : m[i];
 			if (m[i] != ch)
 				continue;
 
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + look] == ' ') ? ' ' : m[i];
+			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -311,13 +307,11 @@ for (int i = 0; i < m.Length; i++)
 			// Сдвиг врагов влево
 			if ((m[indexCycleMove] % 18) > 9)
 			{
-				var look = 1;
-
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + look] >= '*' && m[i + look] <= '\\') ? m[i + look] : m[i];
+				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && (m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\') ? m[i + lookLeft] : m[i];
 				if (m[i] != ch)
 					continue;
 
-				m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
+				m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"') ? ' ' : m[i];
 				if (m[i] != ch)
 					continue;
 			}
