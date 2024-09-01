@@ -10,6 +10,7 @@ var p = 81;
 var delayBullet = 4;
 var delayAnimation = 16;
 var delayMove = 16;
+var delayEnemyShoot = 64;
 
 loop:
 Console.SetCursorPosition(0, 0);
@@ -102,7 +103,7 @@ for (int i = 0; i < m.Length; i++)
 				continue;
 		}
 
-		// Разрушаем преграды
+		// Разрушаем преграды врагами
 		m[i] = m[i] == '~' && (m[i - p - p] == '*' || m[i - p - p - 1] == '*' || m[i - p - p + 1] == '*' || m[i - p - p - 2] == '*' || m[i - p - p + 2] == '*') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
@@ -113,11 +114,11 @@ for (int i = 0; i < m.Length; i++)
 			continue;
 
 		// Пуля и преграда
-		m[i] = (m[i] == '~' && m[i + p] == '!') ? 'o' : m[i];
+		m[i] = (m[i] == '~' && m[i + p] == '!') ? 'l' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = (m[i] == '!' && (m[i - p] == 'o' || m[i - p] == '\"')) || (m[i] == 'o') ? ' ' : m[i];
+		m[i] = (m[i] == '!' && (m[i - p] == 'l' || m[i - p] == '\"')) || (m[i] == 'l') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 	}
@@ -154,6 +155,14 @@ for (int i = 0; i < m.Length; i++)
 				continue;
 
 			m[i] = (m[i] == '!' && m[i - p] == '!') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
+
+		if (m[indexCycle] % delayEnemyShoot == 0 &&
+			Random.Shared.Next(0, 100) > 50)
+		{
+			m[i] = (m[i] == ' ' && m[i - p] == '<') ? 'o' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -243,6 +252,31 @@ for (int i = m.Length - 1; i >= 0; i--)
 				if (m[i] != ch)
 					continue;
 			}
+		}
+
+		if (m[indexCycle] % delayBullet == 0)
+		{
+			// Пуля
+			m[i] = (m[i] == ' ' && m[i - p] == 'o') ? 'o' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = (m[i] == 'o' && m[i + p] == 'o') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			// Попадание в игрока
+			m[i] = m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("Game Over") : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = (m[i] == '~' && m[i - p] == 'o') ? 'l' : m[i];
+			if (m[i] != ch)
+				continue;
+
+			m[i] = (m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
 		}
 	}
 }
