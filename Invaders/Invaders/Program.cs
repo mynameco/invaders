@@ -291,7 +291,7 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i > offset)
 	{
-		// Сдвиг персонажа вправо
+		// Сдвиг персонажа влево
 		if (m[indexInput] == 'a' &&
 			m[indexPlayer] > 5)
 		{
