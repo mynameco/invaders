@@ -332,38 +332,48 @@ for (int i = m.Length - 1; i >= 0; i--)
 
 for (int i = m.Length - 1; i >= 0; i--)
 {
-	var ch = m[i];
-
 	if (i > offset)
 	{
 		if (m[indexCycle] % delayBullet == 1)
 		{
 			// Пуля
-			m[i] = (m[i] == ' ' && m[i - p] == 'o') ? 'o' : m[i];
-			if (m[i] != ch)
+			if (m[i] == ' ' && m[i - p] == 'o')
+			{
+				m[i] = 'o';
 				continue;
+			}
 
-			m[i] = (m[i] == 'o' && m[i + p] == 'o') ? ' ' : m[i];
-			if (m[i] != ch)
+			if (m[i] == 'o' && m[i + p] == 'o')
+			{
+				m[i] = ' ';
 				continue;
+			}
 
 			// Попадание в своего
-			m[i] = m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')) ? ' ' : m[i];
-			if (m[i] != ch)
+			if (m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')))
+			{
+				m[i] = ' ';
 				continue;
+			}
 
 			// Попадание в игрока
-			m[i] = m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#') ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : m[i];
-			if (m[i] != ch)
+			if (m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#'))
+			{
+				throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n");
 				continue;
+			}
 
-			m[i] = (m[i] == '~' && m[i - p] == 'o') ? 'l' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '~' && m[i - p] == 'o')
+			{
+				m[i] = 'l';
 				continue;
+			}
 
-			m[i] = (m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o') ? ' ' : m[i];
-			if (m[i] != ch)
+			if ((m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o'))
+			{
+				m[i] = ' ';
 				continue;
+			}
 		}
 	}
 }
