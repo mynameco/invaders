@@ -143,6 +143,35 @@ for (int i = 0; i < m.Length; i++)
 
 for (int i = 0; i < m.Length; i++)
 {
+	if (i <= offset)
+	{
+		// Сбрасываем буфер клавиш
+		if (Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' && false)
+		{
+		}
+	}
+	else
+	{
+		if (m[indexCycle] % delayAnimation == 3)
+		{
+			// Анимация рук
+			if (m[i] == '\\' && m[i + p] == '/')
+			{
+				m[i] = ' ';
+				continue;
+			}
+
+			if (m[i] == '/' && m[i + p] == '\\')
+			{
+				m[i] = ' ';
+				continue;
+			}
+		}
+	}
+}
+
+for (int i = 0; i < m.Length; i++)
+{
 	if (i > offset)
 	{
 		// Разрушаем преграды врагами
@@ -153,7 +182,7 @@ for (int i = 0; i < m.Length; i++)
 		}
 
 		// Выстрел
-		if ((m[i] == ' ' && m[i + p] == '^' && m[indexInput] == ' ' && m.AsSpan(offset).ToString().IndexOf('!') == -1))
+		if (m[i] == ' ' && m[i + p] == '^' && m[indexInput] == ' ' && m.AsSpan(offset).ToString().IndexOf('!') == -1)
 		{
 			m[i] = '!';
 			continue;
@@ -183,31 +212,8 @@ for (int i = 0; i < m.Length; i++)
 
 for (int i = 0; i < m.Length; i++)
 {
-	if (i <= offset)
+	if (i > offset)
 	{
-		// Сбрасываем буфер клавиш
-		if (Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' && false)
-		{
-		}
-	}
-	else
-	{
-		if (m[indexCycle] % delayAnimation == 3)
-		{
-			// Анимация рук
-			if (m[i] == '\\' && m[i + p] == '/')
-			{
-				m[i] = ' ';
-				continue;
-			}
-
-			if (m[i] == '/' && m[i + p] == '\\')
-			{
-				m[i] = ' ';
-				continue;
-			}
-		}
-
 		if (m[indexCycle] % delayBullet == 1)
 		{
 			// Пуля
