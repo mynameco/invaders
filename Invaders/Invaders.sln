@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invaders", "Invaders\Invaders.csproj", "{49A9A86B-1B30-4AA2-8BA7-9D539A012BA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invaders", "Invaders\Invaders.csproj", "{49A9A86B-1B30-4AA2-8BA7-9D539A012BA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvadersCompact", "InvadersCompact\InvadersCompact.csproj", "{A4536559-677A-4FD8-858C-6CC84F67B38F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{49A9A86B-1B30-4AA2-8BA7-9D539A012BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49A9A86B-1B30-4AA2-8BA7-9D539A012BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49A9A86B-1B30-4AA2-8BA7-9D539A012BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4536559-677A-4FD8-858C-6CC84F67B38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4536559-677A-4FD8-858C-6CC84F67B38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4536559-677A-4FD8-858C-6CC84F67B38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4536559-677A-4FD8-858C-6CC84F67B38F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
