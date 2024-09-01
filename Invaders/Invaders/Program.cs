@@ -135,7 +135,7 @@ for (int i = 0; i < m.Length; i++)
 	if (i <= offset)
 	{
 		// Сбрасываем буфер клавиш
-		m[i] = Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' ? m[i] : m[i];
+		m[i] = Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' && false ? m[i] : m[i];
 	}
 	else
 	{
