@@ -211,7 +211,6 @@ for (int i = m.Length - 1; i >= 0; i--)
 
 		if (m[indexCycle] % delayMove == 0)
 		{
-
 			// Сдвиг врагов вправо
 			if (cycle > 0 &&
 				cycle < 9)
