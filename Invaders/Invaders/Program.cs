@@ -96,11 +96,7 @@ for (int i = 0; i < m.Length; i++)
 		if (m[i] != ch)
 			continue;
 
-		m[i] = (m[i] == '!' && m[i - p] == 'o') ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
-
-		m[i] = (m[i] == 'o') ? ' ' : m[i];
+		m[i] = (m[i] == '!' && (m[i - p] == 'o' || m[i - p] == '\"')) || (m[i] == 'o') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 	}
