@@ -22,109 +22,155 @@ Console.WriteLine(m.AsSpan(offset).ToString());
 
 for (int i = 0; i < m.Length; i++)
 {
-	var ch = m[i];
-
 	if (i <= offset)
 	{
 		// Число по кругу
-		m[i] = i == indexCycle ? (char)(m[i] + 1) : m[i];
-		if (m[i] != ch)
+		if (i == indexCycle)
+		{
+			m[i] = (char)(m[i] + 1);
 			continue;
+		}
 
 		// Число по кругу
-		m[i] = (i == indexCycleMove && m[indexCycle] % delayMove == 0) ? (char)(m[i] + 1) : m[i];
-		if (m[i] != ch)
+		if (i == indexCycleMove && m[indexCycle] % delayMove == 0)
+		{
+			m[i] = (char)(m[i] + 1);
 			continue;
+		}
 
 		// Инпут
-		m[i] = i == indexInput && !Console.KeyAvailable ? '\0' : m[i];
-		if (m[i] != ch)
+		if (i == indexInput && !Console.KeyAvailable)
+		{
+			m[i] = '\0';
 			continue;
+		}
 
-		m[i] = i == indexInput && Console.KeyAvailable ? Console.ReadKey(true).KeyChar : m[i];
-		if (m[i] != ch)
+		if (i == indexInput && Console.KeyAvailable)
+		{
+			m[i] = Console.ReadKey(true).KeyChar;
 			continue;
+		}
 
 		// Позиция персонажа
-		m[i] = i == indexPlayer ? (char)(m.AsSpan(offset).ToString().IndexOf('^') % p) : m[i];
-		if (m[i] != ch)
+		if (i == indexPlayer)
+		{
+			m[i] = (char)(m.AsSpan(offset).ToString().IndexOf('^') % p);
 			continue;
+		}
 
 		// Победа
-		m[i] = i == indexPlayerTmp && m.AsSpan(offset).ToString().IndexOf('0') == -1 ? throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n") : m[i];
-		if (m[i] != ch)
+		if (i == indexPlayerTmp && m.AsSpan(offset).ToString().IndexOf('0') == -1)
+		{
+			throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n");
 			continue;
+		}
 	}
 	else
 	{
 		// Конец игры
-		m[i] = (m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*' ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : m[i];
-		if (m[i] != ch)
+		if ((m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*')
+		{
+			throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n");
 			continue;
+		}
 
 		if (m[indexCycle] % delayAnimation == 0)
 		{
 			// Анимация ног
-			m[i] = m[i] == '<' ? '/' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '<')
+			{
+				m[i] = '/';
 				continue;
+			}
 
-			m[i] = m[i] == '>' ? '\\' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '>')
+			{
+				m[i] = '\\';
 				continue;
+			}
 
-			m[i] = m[i] == '/' && m[i - p] == '*' ? '<' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '/' && m[i - p] == '*')
+			{
+				m[i] = '<';
 				continue;
+			}
 
-			m[i] = m[i] == '\\' && m[i - p] == '*' ? '>' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '\\' && m[i - p] == '*')
+			{
+				m[i] = '>';
 				continue;
+			}
 
 			// Анимация рук
-			m[i] = m[i] == ' ' && m[i + 2] == '0' && m[i + p] == '/' ? '\\' : m[i];
-			if (m[i] != ch)
+			if (m[i] == ' ' && m[i + 2] == '0' && m[i + p] == '/')
+			{
+				m[i] = '\\';
 				continue;
+			}
 
-			m[i] = m[i] == '/' && m[i - p] == '\\' ? ' ' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '/' && m[i - p] == '\\')
+			{
+				m[i] = ' ';
 				continue;
+			}
 
-			m[i] = m[i] == ' ' && m[i - 2] == '0' && m[i + p] == '\\' ? '/' : m[i];
-			if (m[i] != ch)
+			if (m[i] == ' ' && m[i - 2] == '0' && m[i + p] == '\\')
+			{
+				m[i] = '/';
 				continue;
+			}
 
-			m[i] = m[i] == '\\' && m[i - p] == '/' ? ' ' : m[i];
-			if (m[i] != ch)
+			if (m[i] == '\\' && m[i - p] == '/')
+			{
+				m[i] = ' ';
 				continue;
+			}
 
-			m[i] = m[i] == ' ' && m[i - p] == '\\' && m[i - p + 2] == '0' ? '/' : m[i];
-			if (m[i] != ch)
+			if (m[i] == ' ' && m[i - p] == '\\' && m[i - p + 2] == '0')
+			{
+				m[i] = '/';
 				continue;
+			}
 
-			m[i] = m[i] == ' ' && m[i - p] == '/' && m[i - p - 2] == '0' ? '\\' : m[i];
-			if (m[i] != ch)
+			if (m[i] == ' ' && m[i - p] == '/' && m[i - p - 2] == '0')
+			{
+				m[i] = '\\';
 				continue;
+			}
+		}
+	}
+}
+
+for (int i = 0; i < m.Length; i++)
+{
+	if (i > offset)
+	{
+		// Разрушаем преграды врагами
+		if (m[i] == '~' && (m[i - p - p] == '*' || m[i - p - p - 1] == '*' || m[i - p - p + 1] == '*' || m[i - p - p - 2] == '*' || m[i - p - p + 2] == '*'))
+		{
+			m[i] = ' ';
+			continue;
 		}
 
-		// Разрушаем преграды врагами
-		m[i] = m[i] == '~' && (m[i - p - p] == '*' || m[i - p - p - 1] == '*' || m[i - p - p + 1] == '*' || m[i - p - p - 2] == '*' || m[i - p - p + 2] == '*') ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
-
 		// Выстрел
-		m[i] = (m[i] == ' ' && m[i + p] == '^' && m[indexInput] == ' ' && m.AsSpan(offset).ToString().IndexOf('!') == -1) ? '!' : m[i];
-		if (m[i] != ch)
+		if ((m[i] == ' ' && m[i + p] == '^' && m[indexInput] == ' ' && m.AsSpan(offset).ToString().IndexOf('!') == -1))
+		{
+			m[i] = '!';
 			continue;
+		}
 
 		// Пуля и преграда
-		m[i] = (m[i] == '~' && m[i + p] == '!') ? 'l' : m[i];
-		if (m[i] != ch)
+		if (m[i] == '~' && m[i + p] == '!')
+		{
+			m[i] = 'l';
 			continue;
+		}
 
-		m[i] = (m[i] == '!' && (m[i - p] == 'l' || m[i - p] == '\"')) || (m[i] == 'l') ? ' ' : m[i];
-		if (m[i] != ch)
+		if ((m[i] == '!' && (m[i - p] == 'l' || m[i - p] == '\"')) || (m[i] == 'l'))
+		{
+			m[i] = ' ';
 			continue;
+		}
 	}
 }
 
@@ -135,7 +181,9 @@ for (int i = 0; i < m.Length; i++)
 	if (i <= offset)
 	{
 		// Сбрасываем буфер клавиш
-		m[i] = Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' && false ? m[i] : m[i];
+		if (Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' && false)
+		{
+		}
 	}
 	else
 	{
