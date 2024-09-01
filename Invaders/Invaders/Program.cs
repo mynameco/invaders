@@ -272,8 +272,6 @@ for (int i = 0; i < m.Length; i++)
 
 for (int i = m.Length - 1; i >= 0; i--)
 {
-	var ch = m[i];
-
 	if (i > offset)
 	{
 		if (m[indexCycle] % delayMove == 5)
@@ -282,26 +280,34 @@ for (int i = m.Length - 1; i >= 0; i--)
 			if ((m[indexCycleMove] % 18) > 0 &&
 				(m[indexCycleMove] % 18) < 9)
 			{
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookRight] >= '*' && m[i + lookRight] <= '\\' && m[i] != m[i + lookRight] ? m[i + lookRight] : m[i];
-				if (m[i] != ch)
+				if ((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookRight] >= '*' && m[i + lookRight] <= '\\')
+				{
+					m[i] = m[i + lookRight];
 					continue;
+				}
 
-				m[i] = m[i] >= '*' && m[i] <= '\\' && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"') ? ' ' : m[i];
-				if (m[i] != ch)
+				if (m[i] >= '*' && m[i] <= '\\' && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"'))
+				{
+					m[i] = ' ';
 					continue;
+				}
 			}
 
 			// Сдвиг врагов вниз
 			if ((m[indexCycleMove] % 18) == 9 ||
 				(m[indexCycleMove] % 18) == 0)
 			{
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookDown] >= '*' && m[i + lookDown] <= '\\' && m[i] != m[i + lookDown] ? m[i + lookDown] : m[i];
-				if (m[i] != ch)
+				if ((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookDown] >= '*' && m[i + lookDown] <= '\\')
+				{
+					m[i] = m[i + lookDown];
 					continue;
+				}
 
-				m[i] = m[i] >= '*' && m[i] <= '\\' && (m[i + lookDown] == ' ' || m[i + lookDown] == '\"') ? ' ' : m[i];
-				if (m[i] != ch)
+				if (m[i] >= '*' && m[i] <= '\\' && (m[i + lookDown] == ' ' || m[i + lookDown] == '\"'))
+				{
+					m[i] = ' ';
 					continue;
+				}
 			}
 		}
 
@@ -309,13 +315,17 @@ for (int i = m.Length - 1; i >= 0; i--)
 		if (m[indexInput] == 'd' &&
 			m[indexPlayer] < p - 7)
 		{
-			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookRight] == '#' || m[i + lookRight] == '^') && m[i] != m[i + lookRight] ? m[i + lookRight] : m[i];
-			if (m[i] != ch)
+			if ((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookRight] == '#' || m[i + lookRight] == '^'))
+			{
+				m[i] = m[i + lookRight];
 				continue;
+			}
 
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"') ? ' ' : m[i];
-			if (m[i] != ch)
+			if ((m[i] == '#' || m[i] == '^') && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"'))
+			{
+				m[i] = ' ';
 				continue;
+			}
 		}
 	}
 }
@@ -360,8 +370,6 @@ for (int i = m.Length - 1; i >= 0; i--)
 
 for (int i = 0; i < m.Length; i++)
 {
-	var ch = m[i];
-
 	if (i > offset)
 	{
 		if (m[indexCycle] % delayMove == 5)
@@ -369,13 +377,17 @@ for (int i = 0; i < m.Length; i++)
 			// Сдвиг врагов влево
 			if ((m[indexCycleMove] % 18) > 9)
 			{
-				m[i] = (m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\' && m[i] != m[i + lookLeft] ? m[i + lookLeft] : m[i];
-				if (m[i] != ch)
+				if ((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\')
+				{
+					m[i] = m[i + lookLeft];
 					continue;
+				}
 
-				m[i] = m[i] >= '*' && m[i] <= '\\' && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"') ? ' ' : m[i];
-				if (m[i] != ch)
+				if (m[i] >= '*' && m[i] <= '\\' && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"'))
+				{
+					m[i] = ' ';
 					continue;
+				}
 			}
 		}
 
@@ -383,13 +395,17 @@ for (int i = 0; i < m.Length; i++)
 		if (m[indexInput] == 'a' &&
 			m[indexPlayer] > 5)
 		{
-			m[i] = (m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^') && m[i] != m[i + lookLeft] ? m[i + lookLeft] : m[i];
-			if (m[i] != ch)
+			if ((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^'))
+			{
+				m[i] = m[i + lookLeft];
 				continue;
+			}
 
-			m[i] = (m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ') ? ' ' : m[i];
-			if (m[i] != ch)
+			if ((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' '))
+			{
+				m[i] = ' ';
 				continue;
+			}
 		}
 	}
 }
