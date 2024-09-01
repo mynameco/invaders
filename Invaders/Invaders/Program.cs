@@ -111,11 +111,11 @@ for (int i = 0; i < m.Length; i++)
 	if (i > offset)
 	{
 		// Пуля
-		m[i] = ((m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '<' || m[i] == '>') && m[i + page] == '!') ? 'x' : m[i];
+		m[i] = ((m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '<' || m[i] == '>') && m[i + page] == '!') ? '+' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = (m[i] == '!' && m[i - page] == 'x') ? ' ' : m[i];
+		m[i] = (m[i] == '!' && m[i - page] == '+') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
 	}
@@ -134,11 +134,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 			cycle < 9)
 		{
 			var look = -1;
-			m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == 'x') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>' || m[i + look] == 'x') ? m[i + look] : m[i];
+			m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == '+') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>' || m[i + look] == '+') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
 
-			m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == 'x') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
+			m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == '+') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -148,11 +148,11 @@ for (int i = m.Length - 1; i >= 0; i--)
 			cycle == 0)
 		{
 			var look = -page;
-			m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == 'x') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>' || m[i + look] == 'x') ? m[i + look] : m[i];
+			m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == '+') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>' || m[i + look] == '+') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
 
-			m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == 'x') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
+			m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == '+') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -169,11 +169,11 @@ for (int i = 0; i < m.Length; i++)
 		if (cycle > 9)
 		{
 			var look = 1;
-			m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == 'x') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>' || m[i + look] == 'x') ? m[i + look] : m[i];
+			m[i] = (m[i] == ' ' || m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == '+') && (m[i + look] == '/' || m[i + look] == '\\' || m[i + look] == '*' || m[i + look] == '0' || m[i + look] == '<' || m[i + look] == '>' || m[i + look] == '+') ? m[i + look] : m[i];
 			if (m[i] != ch)
 				continue;
 
-			m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == 'x') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
+			m[i] = (m[i] == '/' || m[i] == '\\' || m[i] == '*' || m[i] == '0' || m[i] == '<' || m[i] == '>' || m[i] == '+') && (m[i + look] == ' ' || m[i + look] == '-') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
