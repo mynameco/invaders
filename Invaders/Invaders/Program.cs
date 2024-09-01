@@ -250,7 +250,15 @@ for (int i = m.Length - 1; i >= 0; i--)
 					continue;
 			}
 		}
+	}
+}
 
+for (int i = m.Length - 1; i >= 0; i--)
+{
+	var ch = m[i];
+
+	if (i > offset)
+	{
 		if (m[indexCycle] % delayBullet == 0)
 		{
 			// Пуля
