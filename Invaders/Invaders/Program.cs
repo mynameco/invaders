@@ -15,15 +15,16 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i <= offset)
 	{
-		m[i] = i == indexCycle ? (char)(m[i] + 1) : m[i];
+		// Число по кругу
+		/*m[i] = i == indexCycle ? (char)(m[i] + 1) : m[i];
 		if (m[i] != ch)
-			continue;
+			continue;*/
 
 		m[i] = i == indexInput && !Console.KeyAvailable ? '\0' : m[i];
 		if (m[i] != ch)
 			continue;
 
-		m[i] = i == indexInput && Console.KeyAvailable ? Console.ReadKey(false).KeyChar : m[i];
+		m[i] = i == indexInput && Console.KeyAvailable ? Console.ReadKey(true).KeyChar : m[i];
 		if (m[i] != ch)
 			continue;
 
@@ -89,6 +90,19 @@ for (int i = 0; i < m.Length; i++)
 		m[i] = (m[i] == ' ' && m[i + p] == '^' && m[indexInput] == ' ') ? '!' : m[i];
 		if (m[i] != ch)
 			continue;
+
+		// Пуля и преграда
+		m[i] = (m[i] == '~' && m[i + p] == '!') ? 'z' : m[i];
+		if (m[i] != ch)
+			continue;
+
+		m[i] = (m[i] == '!' && m[i - p] == 'z') ? ' ' : m[i];
+		if (m[i] != ch)
+			continue;
+
+		m[i] = (m[i] == 'z') ? ' ' : m[i];
+		if (m[i] != ch)
+			continue;
 	}
 }
 
@@ -96,7 +110,12 @@ for (int i = 0; i < m.Length; i++)
 {
 	var ch = m[i];
 
-	if (i > offset)
+	if (i <= offset)
+	{
+		// Сбрасываем буфер клавиш
+		m[i] = Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' ? m[i] : m[i];
+	}
+	else
 	{
 		// Анимация рук
 		m[i] = m[i] == '\\' && m[i + p] == '/' ? ' ' : m[i];
@@ -115,8 +134,6 @@ for (int i = 0; i < m.Length; i++)
 		m[i] = (m[i] == '!' && m[i - p] == '!') ? ' ' : m[i];
 		if (m[i] != ch)
 			continue;
-
-		//m[i] = Console.KeyAvailable && Console.ReadKey(false).KeyChar == ' ' ? m[i] : m[i];
 	}
 }
 
@@ -185,7 +202,7 @@ for (int i = m.Length - 1; i >= 0; i--)
 		}
 
 		// Сдвиг врагов вниз
-		if (cycle == 9 ||
+		/*if (cycle == 9 ||
 			cycle == 0)
 		{
 			var look = -p;
@@ -197,7 +214,7 @@ for (int i = m.Length - 1; i >= 0; i--)
 			m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + look] == ' ' || m[i + look] == '\"') ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
-		}
+		}*/
 	}
 }
 
@@ -238,5 +255,5 @@ for (int i = 0; i < m.Length; i++)
 	}
 }
 
-Thread.Sleep(200);
+Thread.Sleep(20);
 goto loop;
