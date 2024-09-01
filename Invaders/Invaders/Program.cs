@@ -6,6 +6,10 @@ var indexPlayer = 2;
 var indexPlayerTmp = 3;
 var p = 81;
 
+var delayBullet = 4;
+var delayAnimation = 16;
+var delayMove = 8;
+
 loop:
 Console.SetCursorPosition(0, 0);
 Console.WriteLine(m.AsSpan(offset).ToString());
@@ -17,9 +21,9 @@ for (int i = 0; i < m.Length; i++)
 	if (i <= offset)
 	{
 		// Число по кругу
-		/*m[i] = i == indexCycle ? (char)(m[i] + 1) : m[i];
+		m[i] = i == indexCycle ? (char)(m[i] + 1) : m[i];
 		if (m[i] != ch)
-			continue;*/
+			continue;
 
 		m[i] = i == indexInput && !Console.KeyAvailable ? '\0' : m[i];
 		if (m[i] != ch)
@@ -44,47 +48,50 @@ for (int i = 0; i < m.Length; i++)
 		if (m[i] != ch)
 			continue;
 
-		// Анимация ног
-		m[i] = m[i] == '<' ? '/' : m[i];
-		if (m[i] != ch)
-			continue;
+		if (m[indexCycle] % delayAnimation == 0)
+		{
+			// Анимация ног
+			m[i] = m[i] == '<' ? '/' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == '>' ? '\\' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == '>' ? '\\' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == '/' && m[i - p] == '*' ? '<' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == '/' && m[i - p] == '*' ? '<' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == '\\' && m[i - p] == '*' ? '>' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == '\\' && m[i - p] == '*' ? '>' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		// Анимация рук
-		m[i] = m[i] == ' ' && m[i + 2] == '0' && m[i + p] == '/' ? '\\' : m[i];
-		if (m[i] != ch)
-			continue;
+			// Анимация рук
+			m[i] = m[i] == ' ' && m[i + 2] == '0' && m[i + p] == '/' ? '\\' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == '/' && m[i - p] == '\\' ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == '/' && m[i - p] == '\\' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == ' ' && m[i - 2] == '0' && m[i + p] == '\\' ? '/' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == ' ' && m[i - 2] == '0' && m[i + p] == '\\' ? '/' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == '\\' && m[i - p] == '/' ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == '\\' && m[i - p] == '/' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == ' ' && m[i - p] == '\\' && m[i - p + 2] == '0' ? '/' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == ' ' && m[i - p] == '\\' && m[i - p + 2] == '0' ? '/' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == ' ' && m[i - p] == '/' && m[i - p - 2] == '0' ? '\\' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == ' ' && m[i - p] == '/' && m[i - p - 2] == '0' ? '\\' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
 
 		// Разрушаем преграды
 		m[i] = m[i] == '~' && (m[i - p - p] == '*' || m[i - p - p - 1] == '*' || m[i - p - p + 1] == '*' || m[i - p - p - 2] == '*' || m[i - p - p + 2] == '*') ? ' ' : m[i];
@@ -118,23 +125,29 @@ for (int i = 0; i < m.Length; i++)
 	}
 	else
 	{
-		// Анимация рук
-		m[i] = m[i] == '\\' && m[i + p] == '/' ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
+		if (m[indexCycle] % delayAnimation == 0)
+		{
+			// Анимация рук
+			m[i] = m[i] == '\\' && m[i + p] == '/' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = m[i] == '/' && m[i + p] == '\\' ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = m[i] == '/' && m[i + p] == '\\' ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
 
-		// Пуля
-		m[i] = (m[i] == ' ' && m[i + p] == '!') ? '!' : m[i];
-		if (m[i] != ch)
-			continue;
+		if (m[indexCycle] % delayBullet == 0)
+		{
+			// Пуля
+			m[i] = (m[i] == ' ' && m[i + p] == '!') ? '!' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = (m[i] == '!' && m[i - p] == '!') ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = (m[i] == '!' && m[i - p] == '!') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
 	}
 }
 
@@ -144,14 +157,17 @@ for (int i = 0; i < m.Length; i++)
 
 	if (i > offset)
 	{
-		// Пуля
-		m[i] = ((m[i] >= '*' && m[i] <= '\\') && m[i + p] == '!') ? '+' : m[i];
-		if (m[i] != ch)
-			continue;
+		if (m[indexCycle] % delayBullet == 0)
+		{
+			// Пуля
+			m[i] = ((m[i] >= '*' && m[i] <= '\\') && m[i + p] == '!') ? '+' : m[i];
+			if (m[i] != ch)
+				continue;
 
-		m[i] = (m[i] == '!' && m[i - p] == '+') ? ' ' : m[i];
-		if (m[i] != ch)
-			continue;
+			m[i] = (m[i] == '!' && m[i - p] == '+') ? ' ' : m[i];
+			if (m[i] != ch)
+				continue;
+		}
 
 		// Взрыв
 		m[i] = (m[i] >= '*' && m[i] <= '\\') && (m[i + 1] == '+' || m[i - 1] == '+' || m[i + p] == '+' || m[i - p] == '+') ? '+' : m[i];
