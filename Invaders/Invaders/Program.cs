@@ -159,10 +159,11 @@ for (int i = 0; i < m.Length; i++)
 				continue;
 		}
 
-		if (m[indexCycle] % delayEnemyShoot == 0 &&
+		// Сдвиг чтобы не конфликтовало с движением
+		if (m[indexCycle] % delayEnemyShoot == 3 &&
 			Random.Shared.Next(0, 100) > 50)
 		{
-			m[i] = (m[i] == ' ' && m[i - p] == '<') ? 'o' : m[i];
+			m[i] = (m[i] == ' ' && m[i - p] == '<' && m[i + p] != '*' && m[i + p + 1] != '*' && m[i + p - 1] != '*') ? 'o' : m[i];
 			if (m[i] != ch)
 				continue;
 		}
@@ -266,7 +267,7 @@ for (int i = m.Length - 1; i >= 0; i--)
 				continue;
 
 			// Попадание в своего
-			m[i] = m[i] == 'o' && (m[i + p] >= '*' && m[i + p] <= '\\') ? ' ' : m[i];
+			m[i] = m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')) ? ' ' : m[i];
 			if (m[i] != ch)
 				continue;
 
