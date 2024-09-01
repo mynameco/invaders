@@ -183,7 +183,7 @@ for (int i = 0; i < m.Length; i++)
 		if (m[indexCycle] % delayBullet == 0)
 		{
 			// Пуля
-			m[i] = (m[i] >= '*' && m[i] <= '\\' && m[i + p] == '!') ? '+' : m[i];
+			m[i] = (m[i] >= '*' && m[i] <= '\\' && m[i + p] == '!' && m[i] != '+') ? '+' : m[i];
 			if (m[i] != ch)
 				continue;
 
