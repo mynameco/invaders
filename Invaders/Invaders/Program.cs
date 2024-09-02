@@ -19,7 +19,12 @@ var lookDown = -p;
 
 for (; ; )
 {
+	Console.Beep(m.Contains('+') ? 800 : (m.Contains('!') ? 4500 : 100), 10);
+
+	Thread.Sleep(20);
+
 	Console.SetCursorPosition(0, 0);
+
 	Console.WriteLine(m.AsSpan().ToString());
 
 	d[indexCycle] = (char)(d[indexCycle] + 1);
@@ -367,8 +372,4 @@ for (; ; )
 			}
 		}
 	}
-
-	Console.Beep(m.Contains('+') ? 800 : (m.Contains('!') ? 4500 : 100), 10);
-
-	Thread.Sleep(20);
 }
