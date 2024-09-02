@@ -183,28 +183,7 @@ for (; ; )
 		}
 		else if (p == 4)
 		{
-			if (d[indexCycle] % delayBullet == 1)
-			{
-				// Попадание пули
-				if (m[i] >= '*' && m[i] <= '\\' && m[i + page] == '!')
-				{
-					m[i] = '+';
-					continue;
-				}
-
-				if (m[i] == '!' && m[i - page] == '+')
-				{
-					m[i] = ' ';
-					continue;
-				}
-			}
-
-			// Взрыв
-			if (m[i] >= '*' && m[i] <= '\\' && (m[i + 1] == '+' || m[i - 1] == '+' || m[i + page] == '+' || m[i - page] == '+'))
-			{
-				m[i] = '+';
-				continue;
-			}
+			m[i] = (d[indexCycle] % delayBullet == 1) ? (m[i] >= '*' && m[i] <= '\\' && m[i + page] == '!') ? '+' : ((m[i] == '!' && m[i - page] == '+') ? ' ' : m[i]) : ((m[i] >= '*' && m[i] <= '\\' && (m[i + 1] == '+' || m[i - 1] == '+' || m[i + page] == '+' || m[i - page] == '+')) ? '+' : m[i]);
 		}
 		else if (p == 5)
 		{
