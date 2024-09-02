@@ -125,21 +125,7 @@ for (; ; )
 		}
 		else if (p == 1)
 		{
-			if (d[indexCycle] % delayAnimation == 3)
-			{
-				// Анимация рук
-				if (m[i] == '\\' && m[i + page] == '/')
-				{
-					m[i] = ' ';
-					continue;
-				}
-
-				if (m[i] == '/' && m[i + page] == '\\')
-				{
-					m[i] = ' ';
-					continue;
-				}
-			}
+			m[i] = (d[indexCycle] % delayAnimation == 3) ? ((m[i] == '\\' && m[i + page] == '/') ? ' ' : ((m[i] == '/' && m[i + page] == '\\') ? ' ' : m[i])) : m[i];
 		}
 		else if (p == 2)
 		{
