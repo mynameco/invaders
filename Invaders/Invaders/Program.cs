@@ -19,9 +19,9 @@ var lookDown = -p;
 
 for (; ; )
 {
-	Console.Beep(m.Contains('+') ? 800 : (m.Contains('!') ? 4500 : 100), 10);
-
 	Thread.Sleep(20);
+
+	Console.Beep(m.Contains('+') ? 800 : (m.Contains('!') ? 4500 : 100), 10);
 
 	Console.SetCursorPosition(0, 0);
 
