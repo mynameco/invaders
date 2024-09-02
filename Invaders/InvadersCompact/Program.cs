@@ -43,23 +43,28 @@ for (; ; )
 		{
 			m[i] = ((m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - page - page] == '*') ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : ((d[indexCycle] % delayResetBuffer == 1) ? ((Console.KeyAvailable && Console.ReadKey(true).KeyChar == ' ' && false) ? m[i] : m[i]) : ((d[indexCycle] % delayAnimation == 3) ? ((m[i] == '<') ? '/' : ((m[i] == '>') ? '\\' : ((m[i] == '/' && m[i - page] == '*') ? '<' : ((m[i] == '\\' && m[i - page] == '*') ? '>' : ((m[i] == ' ' && m[i + 2] == '0' && m[i + page] == '/') ? '\\' : (m[i] == '/' && m[i - page] == '\\') ? ' ' : ((m[i] == ' ' && m[i - 2] == '0' && m[i + page] == '\\') ? '/' : ((m[i] == '\\' && m[i - page] == '/') ? ' ' : ((m[i] == ' ' && m[i - page] == '\\' && m[i - page + 2] == '0') ? '/' : ((m[i] == ' ' && m[i - page] == '/' && m[i - page - 2] == '0') ? '\\' : m[i]))))))))) : m[i]));
 		}
-		else if (p == 1)
+
+		if (p == 1)
 		{
 			m[i] = (d[indexCycle] % delayAnimation == 3) ? ((m[i] == '\\' && m[i + page] == '/') ? ' ' : ((m[i] == '/' && m[i + page] == '\\') ? ' ' : m[i])) : m[i];
 		}
-		else if (p == 2)
+
+		if (p == 2)
 		{
 			m[i] = (m[i] == '~' && (m[i - page - page] == '*' || m[i - page - page - 1] == '*' || m[i - page - page + 1] == '*' || m[i - page - page - 2] == '*' || m[i - page - page + 2] == '*')) ? ' ' : ((m[i] == ' ' && m[i + page] == '^' && d[indexInput] == ' ' && !m.Contains('!')) ? '!' : ((m[i] == '~' && m[i + page] == '!') ? 'l' : ((m[i] == '!' && (m[i - page] == 'l' || m[i - page] == '\"')) || (m[i] == 'l')) ? ' ' : ((m[i] == '+' && (m[i + 1] == '+' || m[i + 1] == ' ') && (m[i - 1] == '+' || m[i - 1] == ' ') && (m[i + page] == '+' || m[i + page] == ' ') && (m[i - page] == '+' || m[i - page] == ' ')) ? ' ' : m[i])));
 		}
-		else if (p == 3)
+
+		if (p == 3)
 		{
 			m[i] = (d[indexCycle] % delayBullet == 1) ? ((m[i] == ' ' && m[i + page] == '!') ? '!' : ((m[i] == '!' && m[i - page] == '!') ? ' ' : m[i])) : ((d[indexCycle] % delayEnemyShoot == 7 && Random.Shared.Next(0, 100) > 50) ? ((m[i] == ' ' && m[i - page] == '<' && m[i + page] != '*' && m[i + page + 1] != '*' && m[i + page - 1] != '*') ? 'o' : m[i]) : m[i]);
 		}
-		else if (p == 4)
+
+		if (p == 4)
 		{
 			m[i] = (d[indexCycle] % delayBullet == 1) ? (m[i] >= '*' && m[i] <= '\\' && m[i + page] == '!') ? '+' : ((m[i] == '!' && m[i - page] == '+') ? ' ' : m[i]) : ((m[i] >= '*' && m[i] <= '\\' && (m[i + 1] == '+' || m[i - 1] == '+' || m[i + page] == '+' || m[i - page] == '+')) ? '+' : m[i]);
 		}
-		else if (p == 5)
+
+		if (p == 5)
 		{
 			if (d[indexCycle] % delayBullet == 1)
 			{
@@ -103,11 +108,13 @@ for (; ; )
 				}
 			}
 		}
-		else if (p == 6)
+
+		if (p == 6)
 		{
 			m[j] = (d[indexCycle] % delayMove == 5) ? (((d[indexCycleMove] % 18) > 0 && (d[indexCycleMove] % 18) < 9) ? (((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookRight] >= '*' && m[j + lookRight] <= '\\') ? m[j + lookRight] : ((m[j] >= '*' && m[j] <= '\\' && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"')) ? ' ' : m[j])) : (((d[indexCycleMove] % 18) == 9 || (d[indexCycleMove] % 18) == 0) ? (((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookDown] >= '*' && m[j + lookDown] <= '\\') ? m[j + lookDown] : ((m[j] >= '*' && m[j] <= '\\' && (m[j + lookDown] == ' ' || m[j + lookDown] == '\"')) ? ' ' : m[j])) : m[j])) : ((d[indexInput] == 'd' && d[indexPlayer] < page - 7) ? (((m[j] == ' ' || m[j] == '#' || m[j] == '^') && (m[j + lookRight] == '#' || m[j + lookRight] == '^')) ? m[j + lookRight] : (((m[j] == '#' || m[j] == '^') && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"')) ? ' ' : m[j])) : m[j]);
 		}
-		else if (p == 7)
+
+		if (p == 7)
 		{
 			m[i] = (d[indexCycle] % delayMove == 5) ? (((d[indexCycleMove] % 18) > 9) ? (((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\') ? m[i + lookLeft] : ((m[i] >= '*' && m[i] <= '\\' && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"')) ? ' ' : m[i])) : m[i]) : ((d[indexInput] == 'a' && d[indexPlayer] > 5) ? (((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^')) ? m[i + lookLeft] : (((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ')) ? ' ' : m[i])) : m[i]);
 		}
