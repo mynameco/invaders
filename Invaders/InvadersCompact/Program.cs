@@ -241,41 +241,7 @@ for (; ; )
 		}
 		else if (p == 7)
 		{
-			if (d[indexCycle] % delayMove == 5)
-			{
-				// Сдвиг врагов влево
-				if ((d[indexCycleMove] % 18) > 9)
-				{
-					if ((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\')
-					{
-						m[i] = m[i + lookLeft];
-						continue;
-					}
-
-					if (m[i] >= '*' && m[i] <= '\\' && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"'))
-					{
-						m[i] = ' ';
-						continue;
-					}
-				}
-			}
-
-			// Сдвиг персонажа влево
-			if (d[indexInput] == 'a' &&
-				d[indexPlayer] > 5)
-			{
-				if ((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^'))
-				{
-					m[i] = m[i + lookLeft];
-					continue;
-				}
-
-				if ((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' '))
-				{
-					m[i] = ' ';
-					continue;
-				}
-			}
+			m[i] = (d[indexCycle] % delayMove == 5) ? (((d[indexCycleMove] % 18) > 9) ? (((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookLeft] >= '*' && m[i + lookLeft] <= '\\') ? m[i + lookLeft] : ((m[i] >= '*' && m[i] <= '\\' && (m[i + lookLeft] == ' ' || m[i + lookLeft] == '\"')) ? ' ' : m[i])) : m[i]) : ((d[indexInput] == 'a' && d[indexPlayer] > 5) ? (((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^')) ? m[i + lookLeft] : (((m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == ' ')) ? ' ' : m[i])) : m[i]);
 		}
 	}
 }
