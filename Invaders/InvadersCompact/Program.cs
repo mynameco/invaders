@@ -21,7 +21,7 @@ for (; ; )
 {
 	Thread.Sleep(20);
 
-	Console.Beep(m.Contains('+') ? 800 : (m.Contains('!') ? 4500 : 100), 10);
+	//Console.Beep(m.Contains('+') ? 800 : (m.Contains('!') ? 4500 : 100), 10);
 
 	Console.SetCursorPosition(0, 0);
 
@@ -179,30 +179,7 @@ for (; ; )
 		}
 		else if (p == 3)
 		{
-			if (d[indexCycle] % delayBullet == 1)
-			{
-				// Пуля
-				if (m[i] == ' ' && m[i + page] == '!')
-				{
-					m[i] = '!';
-					continue;
-				}
-
-				if (m[i] == '!' && m[i - page] == '!')
-				{
-					m[i] = ' ';
-					continue;
-				}
-			}
-
-			if (d[indexCycle] % delayEnemyShoot == 7 && Random.Shared.Next(0, 100) > 50)
-			{
-				if (m[i] == ' ' && m[i - page] == '<' && m[i + page] != '*' && m[i + page + 1] != '*' && m[i + page - 1] != '*')
-				{
-					m[i] = 'o';
-					continue;
-				}
-			}
+			m[i] = (d[indexCycle] % delayBullet == 1) ? ((m[i] == ' ' && m[i + page] == '!') ? '!' : ((m[i] == '!' && m[i - page] == '!') ? ' ' : m[i])) : ((d[indexCycle] % delayEnemyShoot == 7 && Random.Shared.Next(0, 100) > 50) ? ((m[i] == ' ' && m[i - page] == '<' && m[i + page] != '*' && m[i + page + 1] != '*' && m[i + page - 1] != '*') ? 'o' : m[i]) : m[i]);
 		}
 		else if (p == 4)
 		{
