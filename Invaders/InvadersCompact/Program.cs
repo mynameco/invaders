@@ -129,39 +129,7 @@ for (; ; )
 		}
 		else if (p == 2)
 		{
-			// Разрушаем преграды врагами
-			if (m[i] == '~' && (m[i - page - page] == '*' || m[i - page - page - 1] == '*' || m[i - page - page + 1] == '*' || m[i - page - page - 2] == '*' || m[i - page - page + 2] == '*'))
-			{
-				m[i] = ' ';
-				continue;
-			}
-
-			// Выстрел
-			if (m[i] == ' ' && m[i + page] == '^' && d[indexInput] == ' ' && !m.Contains('!'))
-			{
-				m[i] = '!';
-				continue;
-			}
-
-			// Пуля и преграда
-			if (m[i] == '~' && m[i + page] == '!')
-			{
-				m[i] = 'l';
-				continue;
-			}
-
-			if ((m[i] == '!' && (m[i - page] == 'l' || m[i - page] == '\"')) || (m[i] == 'l'))
-			{
-				m[i] = ' ';
-				continue;
-			}
-
-			// Убираем последствия взрыва
-			if (m[i] == '+' && (m[i + 1] == '+' || m[i + 1] == ' ') && (m[i - 1] == '+' || m[i - 1] == ' ') && (m[i + page] == '+' || m[i + page] == ' ') && (m[i - page] == '+' || m[i - page] == ' '))
-			{
-				m[i] = ' ';
-				continue;
-			}
+			m[i] = (m[i] == '~' && (m[i - page - page] == '*' || m[i - page - page - 1] == '*' || m[i - page - page + 1] == '*' || m[i - page - page - 2] == '*' || m[i - page - page + 2] == '*')) ? ' ' : ((m[i] == ' ' && m[i + page] == '^' && d[indexInput] == ' ' && !m.Contains('!')) ? '!' : ((m[i] == '~' && m[i + page] == '!') ? 'l' : ((m[i] == '!' && (m[i - page] == 'l' || m[i - page] == '\"')) || (m[i] == 'l')) ? ' ' : ((m[i] == '+' && (m[i + 1] == '+' || m[i + 1] == ' ') && (m[i - 1] == '+' || m[i - 1] == ' ') && (m[i + page] == '+' || m[i + page] == ' ') && (m[i - page] == '+' || m[i - page] == ' ')) ? ' ' : m[i])));
 		}
 		else if (p == 3)
 		{
