@@ -11,7 +11,7 @@ var delayBullet = 4;
 var delayAnimation = 16;
 var delayMove = 16;
 var delayEnemyShoot = 64;
-var delayResetBuffer = 8;
+var delayResetBuffer = 4;
 
 var lookLeft = 1;
 var lookRight = -1;
@@ -46,7 +46,7 @@ for (; ; )
 			continue;
 		}
 
-		if (d[indexCycle] % delayResetBuffer == 0)
+		if (d[indexCycle] % delayResetBuffer == 1)
 		{
 			// Сбрасываем буфер клавиш
 			if (Console.KeyAvailable &&
