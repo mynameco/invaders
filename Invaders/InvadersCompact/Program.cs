@@ -37,7 +37,7 @@ for (; ; )
 
 	d[indexPlayerWin] = (!m.Contains('0')) ? throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n") : d[indexPlayerWin];
 
-	for (int i = 0; i < m.Length; i++)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		// Конец игры
 		if ((m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*')
@@ -122,7 +122,7 @@ for (; ; )
 		}
 	}
 
-	for (int i = 0; i < m.Length; i++)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		if (d[indexCycle] % delayAnimation == 3)
 		{
@@ -141,7 +141,7 @@ for (; ; )
 		}
 	}
 
-	for (int i = 0; i < m.Length; i++)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		// Разрушаем преграды врагами
 		if (m[i] == '~' && (m[i - p - p] == '*' || m[i - p - p - 1] == '*' || m[i - p - p + 1] == '*' || m[i - p - p - 2] == '*' || m[i - p - p + 2] == '*'))
@@ -178,7 +178,7 @@ for (; ; )
 		}
 	}
 
-	for (int i = 0; i < m.Length; i++)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		if (d[indexCycle] % delayBullet == 1)
 		{
@@ -206,7 +206,7 @@ for (; ; )
 		}
 	}
 
-	for (int i = 0; i < m.Length; i++)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		if (d[indexCycle] % delayBullet == 1)
 		{
@@ -232,7 +232,7 @@ for (; ; )
 		}
 	}
 
-	for (int j = m.Length - 1; j >= 0; j--)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		if (d[indexCycle] % delayBullet == 1)
 		{
@@ -277,7 +277,7 @@ for (; ; )
 		}
 	}
 
-	for (int j = m.Length - 1; j >= 0; j--)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		if (d[indexCycle] % delayMove == 5)
 		{
@@ -334,7 +334,7 @@ for (; ; )
 		}
 	}
 
-	for (int i = 0; i < m.Length; i++)
+	for (int i = 0, j = m.Length - 1; i < m.Length; i++, j--)
 	{
 		if (d[indexCycle] % delayMove == 5)
 		{
