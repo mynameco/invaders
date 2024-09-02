@@ -105,59 +105,7 @@ for (; ; )
 		}
 		else if (p == 6)
 		{
-			if (d[indexCycle] % delayMove == 5)
-			{
-				// Сдвиг врагов вправо
-				if ((d[indexCycleMove] % 18) > 0 &&
-					(d[indexCycleMove] % 18) < 9)
-				{
-					if ((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookRight] >= '*' && m[j + lookRight] <= '\\')
-					{
-						m[j] = m[j + lookRight];
-						continue;
-					}
-
-					if (m[j] >= '*' && m[j] <= '\\' && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"'))
-					{
-						m[j] = ' ';
-						continue;
-					}
-				}
-
-				// Сдвиг врагов вниз
-				if ((d[indexCycleMove] % 18) == 9 ||
-					(d[indexCycleMove] % 18) == 0)
-				{
-					if ((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookDown] >= '*' && m[j + lookDown] <= '\\')
-					{
-						m[j] = m[j + lookDown];
-						continue;
-					}
-
-					if (m[j] >= '*' && m[j] <= '\\' && (m[j + lookDown] == ' ' || m[j + lookDown] == '\"'))
-					{
-						m[j] = ' ';
-						continue;
-					}
-				}
-			}
-
-			// Сдвиг персонажа вправо
-			if (d[indexInput] == 'd' &&
-				d[indexPlayer] < page - 7)
-			{
-				if ((m[j] == ' ' || m[j] == '#' || m[j] == '^') && (m[j + lookRight] == '#' || m[j + lookRight] == '^'))
-				{
-					m[j] = m[j + lookRight];
-					continue;
-				}
-
-				if ((m[j] == '#' || m[j] == '^') && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"'))
-				{
-					m[j] = ' ';
-					continue;
-				}
-			}
+			m[j] = (d[indexCycle] % delayMove == 5) ? (((d[indexCycleMove] % 18) > 0 && (d[indexCycleMove] % 18) < 9) ? (((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookRight] >= '*' && m[j + lookRight] <= '\\') ? m[j + lookRight] : ((m[j] >= '*' && m[j] <= '\\' && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"')) ? ' ' : m[j])) : (((d[indexCycleMove] % 18) == 9 || (d[indexCycleMove] % 18) == 0) ? (((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookDown] >= '*' && m[j + lookDown] <= '\\') ? m[j + lookDown] : ((m[j] >= '*' && m[j] <= '\\' && (m[j + lookDown] == ' ' || m[j + lookDown] == '\"')) ? ' ' : m[j])) : m[j])) : ((d[indexInput] == 'd' && d[indexPlayer] < page - 7) ? (((m[j] == ' ' || m[j] == '#' || m[j] == '^') && (m[j + lookRight] == '#' || m[j + lookRight] == '^')) ? m[j + lookRight] : (((m[j] == '#' || m[j] == '^') && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"')) ? ' ' : m[j])) : m[j]);
 		}
 		else if (p == 7)
 		{
