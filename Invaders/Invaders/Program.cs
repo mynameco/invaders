@@ -20,52 +20,21 @@ loop:
 Console.SetCursorPosition(0, 0);
 Console.WriteLine(m.AsSpan(offset).ToString());
 
+m[indexCycle] = (char)(m[indexCycle] + 1);
+
+if (m[indexCycle] % delayMove == 5)
+	m[indexCycleMove] = (char)(m[indexCycleMove] + 1);
+
+m[indexInput] = Console.KeyAvailable ? Console.ReadKey(true).KeyChar : '\0';
+
+m[indexPlayer] = (char)(m.AsSpan(offset).ToString().IndexOf('^') % p);
+
+if (m.AsSpan(offset).ToString().IndexOf('0') == -1)
+	throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n");
+
 for (int i = 0; i < m.Length; i++)
 {
-	if (i <= offset)
-	{
-		// Число по кругу
-		if (i == indexCycle)
-		{
-			m[i] = (char)(m[i] + 1);
-			continue;
-		}
-
-		// Число по кругу
-		if (i == indexCycleMove && m[indexCycle] % delayMove == 5)
-		{
-			m[i] = (char)(m[i] + 1);
-			continue;
-		}
-
-		// Инпут
-		if (i == indexInput && !Console.KeyAvailable)
-		{
-			m[i] = '\0';
-			continue;
-		}
-
-		if (i == indexInput && Console.KeyAvailable)
-		{
-			m[i] = Console.ReadKey(true).KeyChar;
-			continue;
-		}
-
-		// Позиция персонажа
-		if (i == indexPlayer)
-		{
-			m[i] = (char)(m.AsSpan(offset).ToString().IndexOf('^') % p);
-			continue;
-		}
-
-		// Победа
-		if (i == indexPlayerTmp && m.AsSpan(offset).ToString().IndexOf('0') == -1)
-		{
-			throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n");
-			continue;
-		}
-	}
-	else
+	if (i > offset)
 	{
 		// Конец игры
 		if ((m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*')
@@ -421,8 +390,8 @@ for (int i = 0; i < m.Length; i++)
 }
 
 var fr = m.AsSpan(offset).ToString().IndexOf('+') != -1 ? 800 : (m.AsSpan(offset).ToString().IndexOf('!') != -1 ? 4500 : 100);
-Console.Beep(fr, 10);
+//Console.Beep(fr, 10);
 
-Thread.Sleep(10);
+Thread.Sleep(20);
 
 goto loop;
