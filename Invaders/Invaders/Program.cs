@@ -4,13 +4,14 @@ var indexCycle = 0;
 var indexCycleMove = 1;
 var indexInput = 2;
 var indexPlayer = 3;
+var indexPlayerWin = 4;
 var p = 81;
 
 var delayBullet = 4;
 var delayAnimation = 16;
 var delayMove = 16;
 var delayEnemyShoot = 64;
-var delayResetBuffer = 16;
+var delayResetBuffer = 8;
 
 var lookLeft = 1;
 var lookRight = -1;
@@ -22,16 +23,13 @@ Console.WriteLine(m.AsSpan().ToString());
 
 d[indexCycle] = (char)(d[indexCycle] + 1);
 
-if (d[indexCycle] % delayMove == 5)
-	d[indexCycleMove] = (char)(d[indexCycleMove] + 1);
+d[indexCycleMove] = (d[indexCycle] % delayMove == 5) ? (char)(d[indexCycleMove] + 1) : d[indexCycleMove];
 
 d[indexInput] = Console.KeyAvailable ? Console.ReadKey(true).KeyChar : '\0';
 
 d[indexPlayer] = (char)(Array.IndexOf(m, '^') % p);
 
-if (!m.Contains('0'))
-	throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n");
-
+d[indexPlayerWin] = (!m.Contains('0')) ? throw new Exception("\n\n\n\n\t\t\t\tWin\n\n\n") : d[indexPlayerWin];
 
 for (int i = 0; i < m.Length; i++)
 {
@@ -42,7 +40,7 @@ for (int i = 0; i < m.Length; i++)
 		continue;
 	}
 
-	if (d[indexCycle] % delayResetBuffer == 11)
+	if (d[indexCycle] % delayResetBuffer == 0)
 	{
 		// Сбрасываем буфер клавиш
 		if (Console.KeyAvailable &&
