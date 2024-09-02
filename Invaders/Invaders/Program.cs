@@ -232,7 +232,52 @@ for (; ; )
 		}
 	}
 
-	for (int i = m.Length - 1; i >= 0; i--)
+	for (int j = m.Length - 1; j >= 0; j--)
+	{
+		if (d[indexCycle] % delayBullet == 1)
+		{
+			// Пуля
+			if (m[j] == ' ' && m[j - p] == 'o')
+			{
+				m[j] = 'o';
+				continue;
+			}
+
+			if (m[j] == 'o' && m[j + p] == 'o')
+			{
+				m[j] = ' ';
+				continue;
+			}
+
+			// Попадание в своего
+			if (m[j] == 'o' && ((m[j + p] >= '*' && m[j + p] <= '\\') || (m[j + 1] >= '*' && m[j + 1] <= '\\') || (m[j - 1] >= '*' && m[j - 1] <= '\\')))
+			{
+				m[j] = ' ';
+				continue;
+			}
+
+			// Попадание в игрока
+			if (m[j] == 'o' && (m[j + p] == '^' || m[j + p] == '#'))
+			{
+				throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n");
+				continue;
+			}
+
+			if (m[j] == '~' && m[j - p] == 'o')
+			{
+				m[j] = 'l';
+				continue;
+			}
+
+			if ((m[j] == 'o' && (m[j + p] == 'l' || m[j + p] == '_')) || (m[j] == 'o'))
+			{
+				m[j] = ' ';
+				continue;
+			}
+		}
+	}
+
+	for (int j = m.Length - 1; j >= 0; j--)
 	{
 		if (d[indexCycle] % delayMove == 5)
 		{
@@ -240,15 +285,15 @@ for (; ; )
 			if ((d[indexCycleMove] % 18) > 0 &&
 				(d[indexCycleMove] % 18) < 9)
 			{
-				if ((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookRight] >= '*' && m[i + lookRight] <= '\\')
+				if ((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookRight] >= '*' && m[j + lookRight] <= '\\')
 				{
-					m[i] = m[i + lookRight];
+					m[j] = m[j + lookRight];
 					continue;
 				}
 
-				if (m[i] >= '*' && m[i] <= '\\' && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"'))
+				if (m[j] >= '*' && m[j] <= '\\' && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"'))
 				{
-					m[i] = ' ';
+					m[j] = ' ';
 					continue;
 				}
 			}
@@ -257,15 +302,15 @@ for (; ; )
 			if ((d[indexCycleMove] % 18) == 9 ||
 				(d[indexCycleMove] % 18) == 0)
 			{
-				if ((m[i] == ' ' || (m[i] >= '*' && m[i] <= '\\')) && m[i + lookDown] >= '*' && m[i + lookDown] <= '\\')
+				if ((m[j] == ' ' || (m[j] >= '*' && m[j] <= '\\')) && m[j + lookDown] >= '*' && m[j + lookDown] <= '\\')
 				{
-					m[i] = m[i + lookDown];
+					m[j] = m[j + lookDown];
 					continue;
 				}
 
-				if (m[i] >= '*' && m[i] <= '\\' && (m[i + lookDown] == ' ' || m[i + lookDown] == '\"'))
+				if (m[j] >= '*' && m[j] <= '\\' && (m[j + lookDown] == ' ' || m[j + lookDown] == '\"'))
 				{
-					m[i] = ' ';
+					m[j] = ' ';
 					continue;
 				}
 			}
@@ -275,60 +320,15 @@ for (; ; )
 		if (d[indexInput] == 'd' &&
 			d[indexPlayer] < p - 7)
 		{
-			if ((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookRight] == '#' || m[i + lookRight] == '^'))
+			if ((m[j] == ' ' || m[j] == '#' || m[j] == '^') && (m[j + lookRight] == '#' || m[j + lookRight] == '^'))
 			{
-				m[i] = m[i + lookRight];
+				m[j] = m[j + lookRight];
 				continue;
 			}
 
-			if ((m[i] == '#' || m[i] == '^') && (m[i + lookRight] == ' ' || m[i + lookRight] == '\"'))
+			if ((m[j] == '#' || m[j] == '^') && (m[j + lookRight] == ' ' || m[j + lookRight] == '\"'))
 			{
-				m[i] = ' ';
-				continue;
-			}
-		}
-	}
-
-	for (int i = m.Length - 1; i >= 0; i--)
-	{
-		if (d[indexCycle] % delayBullet == 1)
-		{
-			// Пуля
-			if (m[i] == ' ' && m[i - p] == 'o')
-			{
-				m[i] = 'o';
-				continue;
-			}
-
-			if (m[i] == 'o' && m[i + p] == 'o')
-			{
-				m[i] = ' ';
-				continue;
-			}
-
-			// Попадание в своего
-			if (m[i] == 'o' && ((m[i + p] >= '*' && m[i + p] <= '\\') || (m[i + 1] >= '*' && m[i + 1] <= '\\') || (m[i - 1] >= '*' && m[i - 1] <= '\\')))
-			{
-				m[i] = ' ';
-				continue;
-			}
-
-			// Попадание в игрока
-			if (m[i] == 'o' && (m[i + p] == '^' || m[i + p] == '#'))
-			{
-				throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n");
-				continue;
-			}
-
-			if (m[i] == '~' && m[i - p] == 'o')
-			{
-				m[i] = 'l';
-				continue;
-			}
-
-			if ((m[i] == 'o' && (m[i + p] == 'l' || m[i + p] == '_')) || (m[i] == 'o'))
-			{
-				m[i] = ' ';
+				m[j] = ' ';
 				continue;
 			}
 		}
