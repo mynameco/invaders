@@ -66,47 +66,7 @@ for (; ; )
 
 		if (p == 5)
 		{
-			if (d[indexCycle] % delayBullet == 1)
-			{
-				// Пуля
-				if (m[j] == ' ' && m[j - page] == 'o')
-				{
-					m[j] = 'o';
-					continue;
-				}
-
-				if (m[j] == 'o' && m[j + page] == 'o')
-				{
-					m[j] = ' ';
-					continue;
-				}
-
-				// Попадание в своего
-				if (m[j] == 'o' && ((m[j + page] >= '*' && m[j + page] <= '\\') || (m[j + 1] >= '*' && m[j + 1] <= '\\') || (m[j - 1] >= '*' && m[j - 1] <= '\\')))
-				{
-					m[j] = ' ';
-					continue;
-				}
-
-				// Попадание в игрока
-				if (m[j] == 'o' && (m[j + page] == '^' || m[j + page] == '#'))
-				{
-					throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n");
-					continue;
-				}
-
-				if (m[j] == '~' && m[j - page] == 'o')
-				{
-					m[j] = 'l';
-					continue;
-				}
-
-				if ((m[j] == 'o' && (m[j + page] == 'l' || m[j + page] == '_')) || (m[j] == 'o'))
-				{
-					m[j] = ' ';
-					continue;
-				}
-			}
+			m[j] = (d[indexCycle] % delayBullet == 1) ? ((m[j] == ' ' && m[j - page] == 'o') ? 'o' : ((m[j] == 'o' && m[j + page] == 'o') ? ' ' : ((m[j] == 'o' && ((m[j + page] >= '*' && m[j + page] <= '\\') || (m[j + 1] >= '*' && m[j + 1] <= '\\') || (m[j - 1] >= '*' && m[j - 1] <= '\\'))) ? ' ' : ((m[j] == 'o' && (m[j + page] == '^' || m[j + page] == '#')) ? throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n") : ((m[j] == '~' && m[j - page] == 'o') ? 'l' : (((m[j] == 'o' && (m[j + page] == 'l' || m[j + page] == '_')) || (m[j] == 'o')) ? ' ' : m[j])))))) : m[j];
 		}
 
 		if (p == 6)
