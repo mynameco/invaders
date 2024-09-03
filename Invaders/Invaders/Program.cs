@@ -43,7 +43,6 @@ for (; ; )
 		if ((m[i] == '_' || m[i] == '^' || m[i] == '#') && m[i - p - p] == '*')
 		{
 			throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n");
-			continue;
 		}
 
 		if (d[indexCycle] % delayResetBuffer == 1)
@@ -196,7 +195,8 @@ for (; ; )
 			}
 		}
 
-		if (d[indexCycle] % delayEnemyShoot == 7 && Random.Shared.Next(0, 100) > 50)
+		if (d[indexCycle] % delayEnemyShoot == 7 &&
+			Random.Shared.Next(0, 100) > 50)
 		{
 			if (m[i] == ' ' && m[i - p] == '<' && m[i + p] != '*' && m[i + p + 1] != '*' && m[i + p - 1] != '*')
 			{
@@ -260,7 +260,6 @@ for (; ; )
 			if (m[j] == 'o' && (m[j + p] == '^' || m[j + p] == '#'))
 			{
 				throw new Exception("\n\n\n\n\t\t\t\tGame Over\n\n\n");
-				continue;
 			}
 
 			if (m[j] == '~' && m[j - p] == 'o')
