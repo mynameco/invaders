@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9CBC8235-93EE-4921-BBA9-586DB350D098}</ProjectGuid>
+    <ProjectGuid>{0CAD65D2-977F-4236-9D5A-59246840837C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>InvadersCompactOld</RootNamespace>
-    <AssemblyName>InvadersCompactOld</AssemblyName>
+    <RootNamespace>InvadersCompactFramework</RootNamespace>
+    <AssemblyName>InvadersCompactFramework</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
