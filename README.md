@@ -1,3 +1,3 @@
 # invaders
 
-![Invaders](https://github.com/mynameco/invaders/blob/trunk/Invaders.webp?raw=true)
+![Invaders](https://github.com/mynameco/invaders/blob/main/Invaders.webp?raw=true)
