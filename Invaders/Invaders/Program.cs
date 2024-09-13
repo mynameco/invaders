@@ -31,7 +31,7 @@ for (; ; )
 
 	d[indexCycleMove] = (d[indexCycle] % delayMove == 5) ? (char)(d[indexCycleMove] + 1) : d[indexCycleMove];
 
-	d[indexInput] = Console.KeyAvailable ? Console.ReadKey(true).KeyChar : '\0';
+	d[indexInput] = Console.KeyAvailable ? (char)Console.ReadKey(true).Key : '\0';
 
 	d[indexPlayer] = (char)(Array.IndexOf(m, '^') % p);
 
@@ -316,7 +316,7 @@ for (; ; )
 		}
 
 		// Сдвиг персонажа вправо
-		if (d[indexInput] == 'd' &&
+		if ((d[indexInput] == 68 || d[indexInput] == 39) &&
 			d[indexPlayer] < p - 7)
 		{
 			if ((m[j] == ' ' || m[j] == '#' || m[j] == '^') && (m[j + lookRight] == '#' || m[j + lookRight] == '^'))
@@ -355,7 +355,7 @@ for (; ; )
 		}
 
 		// Сдвиг персонажа влево
-		if (d[indexInput] == 'a' &&
+		if ((d[indexInput] == 65 || d[indexInput] == 37) &&
 			d[indexPlayer] > 5)
 		{
 			if ((m[i] == ' ' || m[i] == '#' || m[i] == '^') && (m[i + lookLeft] == '#' || m[i + lookLeft] == '^'))
